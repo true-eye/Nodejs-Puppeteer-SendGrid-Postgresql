@@ -13,6 +13,7 @@ scrap_onenessboutique = async (func_name) => {
 
             var changedFlag = false;
 
+
             if (prevList.length > 0) {
                 for (let i in currentList) {
                     const curItem = currentList[i];
