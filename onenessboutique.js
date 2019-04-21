@@ -99,7 +99,8 @@ onenessboutique = async () => {
                         const productRef = product.parentElement.getAttribute('href');
                         const productTitle = product.firstElementChild.innerHTML;
                         const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
+                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
+                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
                     }
                 }
             }

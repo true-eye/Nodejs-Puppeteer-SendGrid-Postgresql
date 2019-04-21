@@ -87,7 +87,7 @@ citygear = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.citygear.com/catalog/clearance/brand/nike-jordan-new-balance/prod.-type/shoes/page/${page_index}/sort-by/news_from_date/sort-direction/desc.html`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.citygear.com/catalog/clearance/brand/nike-jordan-new-balance/gender/men-women/prod.-type/shoes/page/${page_index}/sort-by/news_from_date/sort-direction/desc/show/120.html`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];

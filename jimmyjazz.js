@@ -160,7 +160,8 @@ jimmyjazz = async () => {
                         }
                     }
                     if (productRef && productTitle) {
-                        products.push({ ref: productRef, title: productTitle, price: productPrice });
+                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
+                            products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
                 } else {
                     console.log('jimmyjazz error occured')
