@@ -9,10 +9,10 @@ var module_finishline_men = require("./finishline_men.js")
 var module_citygear = require("./citygear.js")
 var module_jimmyjazz = require("./jimmyjazz.js")
 
-app = express();
+//app = express();
 
 //create mail transporter
-
+/*
 var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -29,7 +29,7 @@ var transporter2 = nodemailer.createTransport(smtpTransport({
         user: 'arkamixkicks@gmail.com',
         pass: 'Vin234az$'
     }
-}));
+}));*/
 
 let allWebsites = async () => {
     let message = ``;
@@ -103,6 +103,3 @@ allWebsites();
 //         scheduled: true,
 //         timezone: "America/Los_Angeles"
 //     });
-
-
-//app.listen(process.env.PORT || 3128);
