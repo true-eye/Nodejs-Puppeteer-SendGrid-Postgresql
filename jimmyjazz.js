@@ -103,8 +103,8 @@ jimmyjazz = async () => {
 
         if (isCaptcha) {
             console.log('--Entering to Captcha Mode--')
-            const apiKey = "1a21be9ca8506169bd5b2a310457a8d0"
-            //const apiKey = "962808d9cfd77925df940b91ffa12ca5"
+            //const apiKey = "1a21be9ca8506169bd5b2a310457a8d0"
+            const apiKey = "962808d9cfd77925df940b91ffa12ca5"
 
             const requestId = await initiateCaptchaRequest(apiKey);
 
