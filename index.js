@@ -1,4 +1,4 @@
-const cron = require("node-cron");
+//const cron = require("node-cron");
 const express = require("express");
 let nodemailer = require("nodemailer");
 
@@ -74,16 +74,16 @@ let allWebsites = async () => {
 
 //cron.schedule("* * 12 * *", function () {
 
-//allWebsites();
+allWebsites();
 
-cron.schedule("0 0 8,16 * * *", function () {
-    console.log("running a task every minute");
+// cron.schedule("0 0 8,16 * * *", function () {
+//     console.log("running a task every minute");
 
-    allWebsites();
-}, {
-        scheduled: true,
-        timezone: "America/Los_Angeles"
-    });
+//     allWebsites();
+// }, {
+//         scheduled: true,
+//         timezone: "America/Los_Angeles"
+//     });
 
 
 app.listen(process.env.PORT || 3128);
