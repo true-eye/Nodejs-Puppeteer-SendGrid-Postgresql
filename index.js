@@ -1,10 +1,6 @@
 //const cron = require("node-cron");
 const express = require("express");
 let nodemailer = require("nodemailer");
-var sendgrid = require('sendgrid')(
-    process.env.SENDGRID_USERNAME,
-    process.env.SENDGRID_PASSWORD
-);
 var smtpTransport = require('nodemailer-smtp-transport');
 var path = require("path");
 
@@ -44,16 +40,15 @@ let allWebsites = async () => {
     //message += `<h3>Hello! This is a Test!!!</h3>`
     //console.log(message)
 
-    sendgrid.send({
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
         to: 'shasta0312@outlook.com',
         from: 'arkamixkicks@gmail.com',
         ubject: `Website Product Scrap Daily Report`,
         html: message
-    }, function (err, json) {
-        if (err) {
-            console.error(err);
-        }
-    });
+    };
+    sgMail.send(msg);
 
     /*let mailOptions = {
         from: "arkamixkicks@gmail.com",
