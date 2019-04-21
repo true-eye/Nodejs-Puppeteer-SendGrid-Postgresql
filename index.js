@@ -9,7 +9,7 @@ var module_finishline_men = require("./finishline_men.js")
 var module_citygear = require("./citygear.js")
 var module_jimmyjazz = require("./jimmyjazz.js")
 
-//app = express();
+app = express();
 
 //create mail transporter
 /*
@@ -103,3 +103,6 @@ allWebsites();
 //         scheduled: true,
 //         timezone: "America/Los_Angeles"
 //     });
+
+
+app.listen(process.env.PORT || 3128);
