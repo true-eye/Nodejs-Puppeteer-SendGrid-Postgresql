@@ -34,9 +34,9 @@ var transporter2 = nodemailer.createTransport(smtpTransport({
 
 let allWebsites = async () => {
     let message = ``;
-    //message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
+    message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
-    //message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
+    message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
     message += await module_jimmyjazz.scrap_jimmyjazz("scrap_jimmyjazz");   //complete
     //message += `<h3>Hello! This is a Test!!!</h3>`
     //console.log(message)
