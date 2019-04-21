@@ -6,13 +6,14 @@ var manageDBFile = require("./manageDBFile/index.js")
 scrap_citygear = async (func_name) => {
     console.log(func_name, '   Start   ');
     let siteURL = "https://www.citygear.com/catalog/clearance/brand/nike-jordan-new-balance/prod.-type/shoes/sort-by/news_from_date/sort-direction/desc.html"
+
     let ret = await manageDBFile.load_from_file("citygear.json").then(prevList => {
         return citygear().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
             var changedFlag = false;
-            let message = ""
+            let message = `<h2 style="background: white; color: red; text-align: center;">www.citygear.com</h2>`
 
             if (prevList.length > 0) {
                 for (let i in currentList) {
@@ -23,9 +24,7 @@ scrap_citygear = async (func_name) => {
                         // curItem is a new item
                         console.log(`******* ${func_name} new item launched ******`, curItem)
 
-                        message += `<br/>${siteURL}<br/>
-                                                        ------New Product Launched------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}`
+                        message += `<h4>New Product Launched Ref: ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
 
                         changedFlag = true;
                     } else {
@@ -33,9 +32,7 @@ scrap_citygear = async (func_name) => {
                         if (curItem.price != prevProduct.price) {
                             console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
-                            message += `<br/>${siteURL}<br/>
-                                                        ------Product Price Changed------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})`
+                            message += `<h4>Product Price Changed Ref: ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
 
                             changedFlag = true;
                         }
@@ -45,7 +42,7 @@ scrap_citygear = async (func_name) => {
 
             if (changedFlag == false) {
                 console.log(func_name, ' no changes')
-                message += `<br/>${siteURL}  :   No Changes<br/> `
+                message += `<h4 style="color: red;">No Changes</h4><br/>`
             }
 
             // save changed product list

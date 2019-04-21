@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+citygear.json
+finishline_men.json
+jimmyjazz.json
+onenessboutique.json
+
 # production
 /build
 

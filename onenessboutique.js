@@ -5,7 +5,7 @@ var manageDBFile = require("./manageDBFile/index.js")
 
 scrap_onenessboutique = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: blue; color: white;">Onenessboutique.com</h2><br/>`
+    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
     let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
         return onenessboutique().then((currentList) => {
 
@@ -23,8 +23,7 @@ scrap_onenessboutique = async (func_name) => {
                         // curItem is a new item
                         console.log(`******* ${func_name} new item launched ******`, curItem)
 
-                        message += `<h4>------New Product Launched------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
+                        message += `<h4>New Product Launched Ref: ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
 
                         changedFlag = true;
                     } else {
@@ -32,8 +31,7 @@ scrap_onenessboutique = async (func_name) => {
                         if (curItem.price != prevProduct.price) {
                             console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
-                            message += `<h4>------Product Price Changed------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
+                            message += `<h4>Product Price Changed Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
 
                             changedFlag = true;
                         }
@@ -101,7 +99,7 @@ onenessboutique = async () => {
                         const productRef = product.parentElement.getAttribute('href');
                         const productTitle = product.firstElementChild.innerHTML;
                         const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        products.push({ ref: productRef, title: productTitle, price: productPrice });
+                        products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
                     }
                 }
             }

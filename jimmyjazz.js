@@ -15,7 +15,7 @@ scrap_jimmyjazz = async (func_name) => {
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
             var changedFlag = false;
-            let message = ""
+            let message = `<h2 style="background: white; color: red; text-align: center;">www.jimmyjazz.com</h2>`
 
             if (prevList.length > 0) {
                 for (let i in currentList) {
@@ -26,9 +26,7 @@ scrap_jimmyjazz = async (func_name) => {
                         // curItem is a new item
                         console.log(`******* ${func_name} new item launched ******`, curItem)
 
-                        message += `<br/>${siteURL}<br/>
-                                                        ------New Product Launched------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}`
+                        message += `<h4>New Product Launched Ref: ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
 
                         changedFlag = true;
                     } else {
@@ -36,9 +34,7 @@ scrap_jimmyjazz = async (func_name) => {
                         if (curItem.price != prevProduct.price) {
                             console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
-                            message += `<br/>${siteURL}<br/>
-                                                        ------Product Price Changed------
-                                    ------Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})`
+                            message += `<h4>Product Price Changed Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
 
                             changedFlag = true;
                         }
@@ -48,7 +44,7 @@ scrap_jimmyjazz = async (func_name) => {
 
             if (changedFlag == false) {
                 console.log(func_name, ' no changes')
-                message += `<br/>${siteURL}  :   No Changes<br/> `
+                message += `<h4 style="color: red;">No Changes</h4> `
             }
 
             // save changed product list
@@ -136,7 +132,7 @@ jimmyjazz = async () => {
                         var div_productgrid_title_a = div_productgrid_info.lastElementChild.firstElementChild;
 
                         if (div_productgrid_brand_a && div_productgrid_title_a) {
-                            productRef = div_productgrid_brand_a.getAttribute('href');
+                            productRef = "www.jimmyjazz.com" + div_productgrid_brand_a.getAttribute('href');
 
                             if (div_productgrid_title_a.lastElementChild) {
                                 var div_product_size = div_productgrid_title_a.lastElementChild
