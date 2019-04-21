@@ -41,7 +41,7 @@ let allWebsites = async () => {
     //console.log(message)
 
     const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    sgMail.setApiKey("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");
     const msg = {
         to: 'shasta0312@outlook.com',
         from: 'arkamixkicks@gmail.com',
