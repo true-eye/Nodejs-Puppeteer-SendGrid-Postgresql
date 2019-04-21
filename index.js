@@ -45,10 +45,20 @@ let allWebsites = async () => {
     const msg = {
         to: 'shasta0312@outlook.com',
         from: 'arkamixkicks@gmail.com',
-        ubject: `Website Product Scrap Daily Report`,
+        subject: `Website Product Scrap Daily Report`,
         html: message
     };
     sgMail.send(msg);
+
+    const sgMail1 = require('@sendgrid/mail');
+    sgMail1.setApiKey("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");
+    const msg1 = {
+        to: 'info@arkamix.com',
+        from: 'arkamixkicks@gmail.com',
+        subject: `Website Product Scrap Daily Report`,
+        html: message
+    };
+    sgMail1.send(msg1);
 
     /*let mailOptions = {
         from: "arkamixkicks@gmail.com",
