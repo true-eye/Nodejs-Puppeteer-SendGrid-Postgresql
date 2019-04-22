@@ -99,7 +99,7 @@ shelta = async () => {
             return { ref: productRef, title: productTitle, price: productPrice }
         })
 
-        console.log(`---------Page ${page_index} ${bLastPage}---------`, productItems);
+        console.log(`---------Page ${page_index} ${bLastPage}---------`);
 
         productList = [...productList, ...productItems]
 

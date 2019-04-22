@@ -74,7 +74,7 @@ let allWebsites = async () => {
         subject: `Website Product Scrap Daily Report`,
         html: message
     };
-    sgMail.send(msg);
+    sgMail.send(msg).then(res => console.log('Successfully sent to client!', res)).catch(err => console.log('Failed sent to client!', err));
 
     const sgMail1 = require('@sendgrid/mail');
     sgMail1.setApiKey("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");
@@ -84,7 +84,7 @@ let allWebsites = async () => {
         subject: `Website Product Scrap Daily Report`,
         html: message
     };
-    sgMail1.send(msg1);
+    sgMail1.send(msg1).then(res => console.log('Successfully sent to me!', res)).catch(err => console.log('Failed sent to client!', err));
 
 }
 
