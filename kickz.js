@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_onenessboutique = async (func_name) => {
+scrap_kickz = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">kickz.com</h2>`
+    let ret = await manageDBFile.load_from_file("kickz.json").then(prevList => {
+        return kickz().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -45,9 +45,9 @@ scrap_onenessboutique = async (func_name) => {
             }
 
             // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
+            // if (prevList.length == 0 || changedFlag == true)
             {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
+                manageDBFile.save_to_file("kickz.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_onenessboutique = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
+            console.log(func_name, ' kickz return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_onenessboutique = async (func_name) => {
     return ret;
 }
 
-onenessboutique = async () => {
+kickz = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -87,26 +87,29 @@ onenessboutique = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.onenessboutique.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.kickz.com/us/sale/jordan,nike/shoes/c?selectedPage=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.paginate .next');
-            const productDetails = document.querySelectorAll('.product-wrap > a > .product-details');
+            let btnNextPage = document.querySelectorAll('.pager .pagerBoxRight');
+            const productDetails = document.querySelectorAll('#product_list_container > .product-info > .no-h-over');
             for (var product of productDetails) {
+                const productRef = product.getAttribute('link');
 
-                if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
-                    if (product.parentElement) {
-                        const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
-                        const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
+                const div_detail_link_wrapper = product.firstElementChild;
+                if (div_detail_link_wrapper) {
+                    const div_headline = div_detail_link_wrapper.children[1];
+                    const div_price = div_detail_link_wrapper.children[2];
+
+                    if (div_headline && div_price) {
+                        const productTitle = div_headline.innerText;
+                        const productPrice = div_price.lastElementChild.innerText;
+                        products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
                 }
             }
 
-            return { products, bLastPage: btnNextPage[0] == undefined }
+            return { products, bLastPage: btnNextPage[0].hasAttribute('href') == undefined || btnNextPage[0].hasAttribute('href') == '' }
         });
 
         console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`);
@@ -123,5 +126,5 @@ onenessboutique = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.scrap_kickz = scrap_kickz;
+exports.kickz = kickz;

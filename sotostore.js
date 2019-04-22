@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_onenessboutique = async (func_name) => {
+scrap_sotostore = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">sotostore.com</h2>`
+    let ret = await manageDBFile.load_from_file("sotostore.json").then(prevList => {
+        return sotostore().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -47,7 +47,7 @@ scrap_onenessboutique = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
+                manageDBFile.save_to_file("sotostore.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_onenessboutique = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
+            console.log(func_name, ' sotostore return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_onenessboutique = async (func_name) => {
     return ret;
 }
 
-onenessboutique = async () => {
+sotostore = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -87,26 +87,28 @@ onenessboutique = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.onenessboutique.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.sotostore.com/en/151/footwear/${page_index}?p=2189&p=21364&p=40456&orderBy=Published`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.paginate .next');
-            const productDetails = document.querySelectorAll('.product-wrap > a > .product-details');
+            let btnNextPage = document.querySelectorAll('.pagination-buttons > .next-page-control');
+            const productDetails = document.querySelectorAll('.product-list > .card > .card-content');
             for (var product of productDetails) {
-
-                if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
-                    if (product.parentElement) {
-                        const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
-                        const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
+                const div_brand = product.children[0];
+                const div_name = product.children[1];
+                const div_price = product.children[2];
+                if (div_brand && div_name && div_price) {
+                    const productVendor = div_brand.innerText;
+                    if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
+                        const productRef = "https://www.sotostore.com" + product.getAttribute('href');
+                        const productTitle = productVendor + " " + div_name.innerText;
+                        const productPrice = div_price.lastElementChild.children[1].innerText;
+                        products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
                 }
             }
 
-            return { products, bLastPage: btnNextPage[0] == undefined }
+            return { products, bLastPage: btnNextPage[0].classList.contains('is-disabled') }
         });
 
         console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`);
@@ -123,5 +125,5 @@ onenessboutique = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.scrap_sotostore = scrap_sotostore;
+exports.sotostore = sotostore;

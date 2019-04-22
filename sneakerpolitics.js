@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_onenessboutique = async (func_name) => {
+scrap_sneakerpolitics = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">sneakerpolitics.com</h2>`
+    let ret = await manageDBFile.load_from_file("sneakerpolitics.json").then(prevList => {
+        return sneakerpolitics().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -47,7 +47,7 @@ scrap_onenessboutique = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
+                manageDBFile.save_to_file("sneakerpolitics.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_onenessboutique = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
+            console.log(func_name, ' sneakerpolitics return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_onenessboutique = async (func_name) => {
     return ret;
 }
 
-onenessboutique = async () => {
+sneakerpolitics = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -87,21 +87,26 @@ onenessboutique = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.onenessboutique.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://sneakerpolitics.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.paginate .next');
-            const productDetails = document.querySelectorAll('.product-wrap > a > .product-details');
+            let btnNextPage = document.querySelectorAll('.paginate .next a');
+            const productDetails = document.querySelectorAll('.twelve > .thumbnail > a');
             for (var product of productDetails) {
+                const productRef = "https://sneakerpolitics.com" + product.getAttribute('href');
+                const productTitle = product.getAttribute('title');
 
-                if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
-                    if (product.parentElement) {
-                        const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
-                        const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
+                if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN')) {
+                    const div_info = product.children[1];
+                    if (div_info) {
+                        const div_price = div_info.children[1];
+
+                        if (div_price) {
+                            const productPrice = div_price.innerText.split(' ')[0];
+
+                            products.push({ ref: productRef, title: productTitle, price: productPrice });
+                        }
                     }
                 }
             }
@@ -123,5 +128,5 @@ onenessboutique = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.scrap_sneakerpolitics = scrap_sneakerpolitics;
+exports.sneakerpolitics = sneakerpolitics;

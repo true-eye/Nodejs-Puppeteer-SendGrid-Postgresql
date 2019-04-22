@@ -1,18 +1,17 @@
 
 const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
+const fetch = require("node-fetch");
 
-
-scrap_onenessboutique = async (func_name) => {
+scrap_shelta = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">shelta.com</h2>`
+    let ret = await manageDBFile.load_from_file("shelta.json").then(prevList => {
+        return shelta().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
             var changedFlag = false;
-
 
             if (prevList.length > 0) {
                 for (let i in currentList) {
@@ -47,7 +46,7 @@ scrap_onenessboutique = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
+                manageDBFile.save_to_file("shelta.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +55,7 @@ scrap_onenessboutique = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
+            console.log(func_name, ' shelta return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,62 +65,52 @@ scrap_onenessboutique = async (func_name) => {
     return ret;
 }
 
-onenessboutique = async () => {
+shelta = async () => {
     // Actual Scraping goes Here...
-
-    const chromeLaunchOptions = {
-        // ignoreHTTPSErrors: true,
-        headless: true,
-        // timeout: 0,
-        args: [
-            '--disable-setuid-sandbox',
-            '--no-sandbox',
-        ],
-    };
-
-    const browser = await puppeteer.launch(chromeLaunchOptions);
-    const page = await browser.newPage();
 
     let productList = [];
 
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.onenessboutique.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        const response = await fetch(`https://shelta.eu/Services/Rest/v2/json/en-GB/EUR/categories/152/40/${page_index}/?priceListId=237810a5-7601-442f-bde7-422bd9ff7740`,
+            {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'text/plain'
+                },
+                body: `{"SearchTerm":null,"ListValues":{"subname":["Jordan","Nike","Nike Sportswear"]},"MultiLevelListValues":{},"SpanValues":{},"BoolValues":{"discounted":true},"OrderBy":null,"SortDirection":null}`
+            }).then(res => res.json())
+            .then(json => json)
+            .catch(err => {
+                console.log(err)
+                return null
+            })
 
-        const pageInfo = await page.evaluate(() => {
-            let products = [];
-            let btnNextPage = document.querySelectorAll('.paginate .next');
-            const productDetails = document.querySelectorAll('.product-wrap > a > .product-details');
-            for (var product of productDetails) {
+        if (!response)
+            break;
 
-                if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
-                    if (product.parentElement) {
-                        const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
-                        const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
-                    }
-                }
-            }
+        const bLastPage = response.ProductsInPage != response.PageSize;
+        const productItems = response.ProductItems.map(item => {
+            const productRef = item.ProductUrl;
+            const productTitle = item.Name;
+            const productPrice = item.Price;
 
-            return { products, bLastPage: btnNextPage[0] == undefined }
-        });
+            return { ref: productRef, title: productTitle, price: productPrice }
+        })
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`);
+        console.log(`---------Page ${page_index} ${bLastPage}---------`, productItems);
 
-        productList = [...productList, ...pageInfo.products]
+        productList = [...productList, ...productItems]
 
-        if (pageInfo.bLastPage == true)
+        if (bLastPage == true)
             break;
         page_index++;
     }
 
     //console.log(productList.length)
 
-    browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.scrap_shelta = scrap_shelta;
+exports.shelta = shelta;

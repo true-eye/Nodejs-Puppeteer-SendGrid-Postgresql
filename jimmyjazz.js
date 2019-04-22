@@ -48,7 +48,8 @@ scrap_jimmyjazz = async (func_name) => {
             }
 
             // save changed product list
-            if (prevList.length == 0 || changedFlag == true) {
+            //if (prevList.length == 0 || changedFlag == true)
+            {
                 manageDBFile.save_to_file("jimmyjazz.json", currentList)
                     .then(res => {
                         console.log(res)

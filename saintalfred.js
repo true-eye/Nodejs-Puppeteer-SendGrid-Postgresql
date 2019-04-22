@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_onenessboutique = async (func_name) => {
+scrap_saintalfred = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">saintalfred.com</h2>`
+    let ret = await manageDBFile.load_from_file("saintalfred.json").then(prevList => {
+        return saintalfred().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -47,7 +47,7 @@ scrap_onenessboutique = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
+                manageDBFile.save_to_file("saintalfred.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_onenessboutique = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
+            console.log(func_name, ' saintalfred return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_onenessboutique = async (func_name) => {
     return ret;
 }
 
-onenessboutique = async () => {
+saintalfred = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -87,21 +87,24 @@ onenessboutique = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.onenessboutique.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.saintalfred.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.paginate .next');
-            const productDetails = document.querySelectorAll('.product-wrap > a > .product-details');
+            let btnNextPage = document.querySelectorAll('.pagination > .pagination-next a');
+            const productDetails = document.querySelectorAll('.collection-products > .product-list-item > .product-list-item-details');
             for (var product of productDetails) {
+                const div_item_vendor = product.children[0];
+                const div_item_title = product.children[1];
+                const div_item_price = product.children[2];
 
-                if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
-                    if (product.parentElement) {
-                        const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
-                        const productPrice = product.lastElementChild.firstElementChild.innerHTML;
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
+                if (div_item_vendor && div_item_title && div_item_price) {
+                    const productVendor = div_item_vendor.innerText;
+                    if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
+                        const productRef = "https://www.saintalfred.com" + div_item_title.firstElementChild.getAttribute('href');
+                        const productTitle = productVendor + ' ' + div_item_title.innerText;
+                        const productPrice = div_item_price.firstElementChild.firstElementChild.innerText;
+                        products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
                 }
             }
@@ -123,5 +126,5 @@ onenessboutique = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.scrap_saintalfred = scrap_saintalfred;
+exports.saintalfred = saintalfred;

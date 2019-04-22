@@ -1,0 +1,537 @@
+[
+    {
+        "ref": "https://www.sotostore.com/en/product/14776/air-huarache-run-91-qs",
+        "title": "NIKE AIR HUARACHE RUN 91 QS",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15748/air-max-95-og",
+        "title": "NIKE AIR MAX 95 OG",
+        "price": "121.80 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17015/air-force-1-sage-high",
+        "title": "NIKE AIR FORCE 1 SAGE HIGH",
+        "price": "126 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16015/vapormax-premier-flyknit",
+        "title": "NIKE VAPORMAX PREMIER FLYKNIT",
+        "price": "160.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16833/air-max-95",
+        "title": "NIKE AIR MAX 95",
+        "price": "132.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17232/air-max-97-bw",
+        "title": "NIKE AIR MAX 97/BW",
+        "price": "125.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16486/air-max-180",
+        "title": "NIKE AIR MAX 180",
+        "price": "101.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16487/air-max-180",
+        "title": "NIKE AIR MAX 180",
+        "price": "101.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17055/air-max-180",
+        "title": "NIKE AIR MAX 180",
+        "price": "108.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17056/air-max-180",
+        "title": "NIKE AIR MAX 180",
+        "price": "108.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/14942/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "139.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15749/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "139.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15750/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "139.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16241/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "143.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16745/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "143.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17179/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "129.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17209/air-max-deluxe-se",
+        "title": "NIKE AIR MAX DELUXE SE",
+        "price": "133 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15695/wmns-air-max-deluxe",
+        "title": "NIKE WMNS AIR MAX DELUXE",
+        "price": "142.80 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17185/acg-air-revaderchi",
+        "title": "NIKE LAB ACG AIR REVADERCHI",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17186/acg-air-revaderchi",
+        "title": "NIKE LAB ACG AIR REVADERCHI",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17187/acg-air-revaderchi",
+        "title": "NIKE LAB ACG AIR REVADERCHI",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17194/acg-okwahn-ii",
+        "title": "NIKE LAB ACG OKWAHN II",
+        "price": "84 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17195/acg-okwahn-ii",
+        "title": "NIKE LAB ACG OKWAHN II",
+        "price": "84 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17189/acg-ruckel-ridge",
+        "title": "NIKE LAB ACG RUCKEL RIDGE",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17180/wmns-air-max-97-special-edition",
+        "title": "NIKE WMNS AIR MAX 97 SPECIAL EDITION",
+        "price": "132.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17183/wmns-air-max-97-special-edition",
+        "title": "NIKE WMNS AIR MAX 97 SPECIAL EDITION",
+        "price": "132.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17177/w-rise-react-flyknit",
+        "title": "NIKE W RISE REACT FLYKNIT",
+        "price": "122.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17012/air-zoom-pegasus-35-shield-nrg",
+        "title": "NIKE AIR ZOOM PEGASUS 35 SHIELD NRG",
+        "price": "94.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17025/air-footscape-mid-utility-dm",
+        "title": "NIKE AIR FOOTSCAPE MID UTILITY DM",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17058/air-force-max-cb",
+        "title": "NIKE AIR FORCE MAX CB",
+        "price": "105 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17008/odyssey-react-shield-nrg",
+        "title": "NIKE ODYSSEY REACT SHIELD NRG",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17009/moon-racer-qs",
+        "title": "NIKE MOON RACER QS",
+        "price": "105 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16929/air-max-deluxe-se",
+        "title": "NIKE AIR MAX DELUXE SE",
+        "price": "133 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16831/air-max-95",
+        "title": "NIKE AIR MAX 95",
+        "price": "132.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16677/air-max-plus-premium",
+        "title": "NIKE AIR MAX PLUS PREMIUM",
+        "price": "119 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16643/wmns-air-max-97-lux",
+        "title": "NIKE WMNS AIR MAX 97 LUX",
+        "price": "133 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16624/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "143.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16163/air-skylon-ii",
+        "title": "NIKE AIR SKYLON II",
+        "price": "70 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16525/grandstand-ii",
+        "title": "NIKE GRANDSTAND II",
+        "price": "63 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16528/air-terra-humara-18",
+        "title": "NIKE AIR TERRA HUMARA ´18",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16529/air-skylon-ii",
+        "title": "NIKE AIR SKYLON II",
+        "price": "70 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16530/air-skylon-ii",
+        "title": "NIKE AIR SKYLON II",
+        "price": "70 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16445/wmns-exp-14",
+        "title": "NIKE WMNS EXP-14",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16365/air-max-deluxe",
+        "title": "NIKE AIR MAX DELUXE",
+        "price": "143.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16148/air-force-1-low-retro-qs-cnvs",
+        "title": "NIKE AIR FORCE 1 LOW RETRO QS CNVS",
+        "price": "90.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16150/air-force-1-low-retro-qs-cnvs",
+        "title": "NIKE AIR FORCE 1 LOW RETRO QS CNVS",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16162/air-max-90-premium",
+        "title": "NIKE AIR MAX ´90 PREMIUM",
+        "price": "104.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16161/air-max-95-premium",
+        "title": "NIKE AIR MAX 95 PREMIUM",
+        "price": "125.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/16146/exp-x14",
+        "title": "NIKE EXP-X14",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15897/wmns-air-max-deluxe",
+        "title": "NIKE WMNS AIR MAX DELUXE",
+        "price": "139.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15741/zm-streak-spectrum-plus-premium",
+        "title": "NIKE ZM STREAK SPECTRUM PLUS PREMIUM",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15742/zm-streak-spectrum-plus-premium",
+        "title": "NIKE ZM STREAK SPECTRUM PLUS PREMIUM",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15745/wmns-air-max-deluxe",
+        "title": "NIKE WMNS AIR MAX DELUXE",
+        "price": "139.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15746/air-max-95-premium",
+        "title": "NIKE AIR MAX 95 PREMIUM",
+        "price": "121.80 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15400/air-safari-se",
+        "title": "NIKE AIR SAFARI SE",
+        "price": "77 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15426/air-skylon-ii",
+        "title": "NIKE AIR SKYLON II",
+        "price": "70 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15497/air-skylon-ii",
+        "title": "NIKE AIR SKYLON II",
+        "price": "70 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/14708/exp-x14",
+        "title": "NIKE EXP-X14",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15705/exp-x14",
+        "title": "NIKE EXP-X14",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4642/wmns-exp-x14",
+        "title": "NIKE WMNS EXP-X14",
+        "price": "91 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15629/wmns-air-max-90",
+        "title": "NIKE WMNS AIR MAX 90",
+        "price": "101.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15698/wmns-air-max-90-1",
+        "title": "NIKE WMNS AIR MAX 90/1",
+        "price": "108.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15696/air-max-1-premium",
+        "title": "NIKE AIR MAX 1 PREMIUM",
+        "price": "100.80 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15697/air-max-1-premium",
+        "title": "NIKE AIR MAX 1 PREMIUM",
+        "price": "100.80 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15424/air-max-95-og",
+        "title": "NIKE AIR MAX 95 OG",
+        "price": "122.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4751/exp-x14-se",
+        "title": "NIKE EXP-X14 SE",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4752/exp-x14-se",
+        "title": "NIKE EXP-X14 SE",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/15084/wmns-outburst",
+        "title": "NIKE WMNS OUTBURST",
+        "price": "66.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/3969/air-force-1-mid-07-lv8",
+        "title": "NIKE AIR FORCE 1 MID ´07 LV8",
+        "price": "84 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/14634/air-max-1-premium",
+        "title": "NIKE AIR MAX 1 PREMIUM",
+        "price": "97.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4643/wmns-air-max-95",
+        "title": "NIKE WMNS AIR MAX 95",
+        "price": "119 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1659/grandstand-ii-pinnacle",
+        "title": "NIKE GRANDSTAND II PINNACLE",
+        "price": "77 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1599/air-max-1-premium-sc",
+        "title": "NIKE AIR MAX 1 PREMIUM SC",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1612/air-zoom-spiridon-16",
+        "title": "NIKE AIR ZOOM SPIRIDON ´16",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1613/air-zoom-spiridon-16",
+        "title": "NIKE AIR ZOOM SPIRIDON ´16",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1614/air-zoom-spiridon-16",
+        "title": "NIKE AIR ZOOM SPIRIDON ´16",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1634/grandstand-ii-pncl",
+        "title": "NIKE GRANDSTAND II PNCL",
+        "price": "77 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1598/air-max-1-premium-sc",
+        "title": "NIKE AIR MAX 1 PREMIUM SC",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/3190/flyknit-trainer-medium-olive",
+        "title": "NIKE LAB FLYKNIT TRAINER MEDIUM OLIVE",
+        "price": "115.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4086/wmns-outburst",
+        "title": "NIKE WMNS OUTBURST",
+        "price": "63 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4087/wmns-outburst",
+        "title": "NIKE WMNS OUTBURST",
+        "price": "63 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1785/air-footscape-woven-chukka-flax",
+        "title": "NIKE AIR FOOTSCAPE WOVEN CHUKKA FLAX",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1800/air-zoom-mariah-fk-racer-platinum-white",
+        "title": "NIKE AIR ZOOM MARIAH FK RACER PLATINUM/ WHITE",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1616/air-zoom-spiridon-16",
+        "title": "NIKE AIR ZOOM SPIRIDON ´16",
+        "price": "97.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4168/wmns-air-max-1",
+        "title": "NIKE WMNS AIR MAX 1",
+        "price": "94.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1649/air-force-1-foamposite-pro-cupsole",
+        "title": "NIKE AIR FORCE 1 FOAMPOSITE PRO CUPSOLE",
+        "price": "125.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4074/wmns-air-max-1-se-prm",
+        "title": "NIKE WMNS AIR MAX 1 SE PRM",
+        "price": "98 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/17046/lunar-force-1-duckboot-18",
+        "title": "NIKE LUNAR FORCE 1 DUCKBOOT ´18",
+        "price": "129.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1656/air-humara-17-premium",
+        "title": "NIKE AIR HUMARA ´17 PREMIUM",
+        "price": "105 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1609/air-max-98-qs",
+        "title": "NIKE AIR MAX 98 QS",
+        "price": "126 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/3157/air-vapormax-chukka-slip",
+        "title": "NIKE LAB AIR VAPORMAX CHUKKA SLIP",
+        "price": "153.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1842/aptare-premium",
+        "title": "NIKE APTARE PREMIUM",
+        "price": "76.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1731/flyknit-trainer-night-purple",
+        "title": "NIKE FLYKNIT TRAINER NIGHT PURPLE",
+        "price": "115.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1626/komyuter",
+        "title": "NIKE KOMYUTER",
+        "price": "105 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/4121/lunarepic-low-flyknit-2",
+        "title": "NIKE LUNAREPIC LOW FLYKNIT 2",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1852/lupinek-flyknit-low-dark-grey-black",
+        "title": "NIKE LUPINEK FLYKNIT LOW DARK GREY/ BLACK",
+        "price": "125.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1676/oversized-anorak-puffer-black-white",
+        "title": "NIKE OVERSIZED ANORAK PUFFER BLACK WHITE",
+        "price": "454.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1349/pantheos",
+        "title": "NIKE PANTHEOS",
+        "price": "56 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1593/pantheos",
+        "title": "NIKE PANTHEOS",
+        "price": "56 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1619/pantheos",
+        "title": "NIKE PANTHEOS",
+        "price": "55.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1837/sock-dart-br-trooper",
+        "title": "NIKE SOCK DART BR TROOPER",
+        "price": "90.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1567/special-field-air-force-1",
+        "title": "NIKE SPECIAL FIELD AIR FORCE 1",
+        "price": "119 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1839/special-field-air-force-1-cargo-crimson",
+        "title": "NIKE SPECIAL FIELD AIR FORCE 1 CARGO/ CRIMSON",
+        "price": "111.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/3154/w-gaiter-boot",
+        "title": "NIKE LAB W GAITER BOOT",
+        "price": "192.50 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1629/w-sf-air-force-1-hi",
+        "title": "NIKE W SF AIR FORCE 1 HI",
+        "price": "133 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1674/wmns-mayfly-lite-pinnacle-platinum",
+        "title": "NIKE WMNS MAYFLY LITE PINNACLE PLATINUM",
+        "price": "76.30 EUR "
+    },
+    {
+        "ref": "https://www.sotostore.com/en/product/1678/wmns-mayfly-lite-thunder-blue",
+        "title": "NIKE WMNS MAYFLY LITE THUNDER BLUE",
+        "price": "76.30 EUR "
+    }
+]
