@@ -24,7 +24,7 @@ let load_from_file = (fileName) => {
                         reject(null);
                     }
                 })
-            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+            await client.query(`SELECT * FROM product_table where url = ${fileName}`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     reject(null);
@@ -77,8 +77,9 @@ let save_to_file = (fileName, json) => {
                 console.log('Saved successfully')
                 done();
                 pg.end();
+                return true;
             });
-            if (result)
+            if (result != null)
                 resolve('Success to Save')
             else
                 reject(null)
