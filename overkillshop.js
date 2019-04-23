@@ -85,7 +85,7 @@ overkillshop = async () => {
 
     let productList = [];
 
-    let page_index = 1;
+    let page_index = 2;
 
     while (1) {
         await page.goto(`https://www.overkillshop.com/en/sale.html?limit=150&manufacturer=445%2C5%2C841&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
