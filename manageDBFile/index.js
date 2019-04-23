@@ -69,7 +69,7 @@ let load_from_file = (fileName) => {
     })
 }
 let save_to_file = (fileName, json) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         var pg = require('pg');
 
         await pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
