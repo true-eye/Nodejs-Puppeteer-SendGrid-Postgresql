@@ -21,7 +21,7 @@ scrap_onenessboutique = async (func_name) => {
 
                     if (productsWithSameTitle.length == 0) {
                         // curItem is a new item
-                        console.log(`******* ${func_name} new item launched ******`, curItem)
+                        // console.log(`******* ${func_name} new item launched ******`, curItem)
 
                         message += `<h4>New Product Launched Ref: ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
 
@@ -29,7 +29,7 @@ scrap_onenessboutique = async (func_name) => {
                     } else {
                         const prevProduct = productsWithSameTitle[0];
                         if (curItem.price != prevProduct.price) {
-                            console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
+                            // console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
                             message += `<h4>Product Price Changed Ref:  ${curItem.ref}, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
 

@@ -80,7 +80,7 @@ let save_to_file = (fileName, json) => {
             };
             const result = false;
             let exist = false;
-            console.log(JSON.stringify(json))
+            // console.log(JSON.stringify(json))
 
             await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
