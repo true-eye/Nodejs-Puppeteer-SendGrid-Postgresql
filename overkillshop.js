@@ -46,6 +46,7 @@ scrap_overkillshop = async (func_name) => {
 
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
+            currentList = [];
             {
                 manageDBFile.save_to_file("overkillshop.json", currentList)
                     .then(res => {
@@ -87,7 +88,7 @@ overkillshop = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.overkillshop.com/en/sale.html?limit=150&manufacturer=445%2C5%2C841&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.overkillshop.com/en/sale.html?limit=150&manufacturer=445%2C5%2C841&p=${page_index}`);
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
@@ -111,7 +112,7 @@ overkillshop = async () => {
             return { products, bLastPage: btnNextPage[0] == undefined }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo);
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.length);
 
         productList = [...productList, ...pageInfo.products]
 
