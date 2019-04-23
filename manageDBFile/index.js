@@ -65,7 +65,7 @@ let save_to_file = (fileName, json) => {
     return new Promise((resolve, reject) => {
         var pg = require('pg');
 
-        pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
