@@ -72,15 +72,43 @@ let save_to_file = (fileName, json) => {
                 return true;
             };
             const result = false;
+            let exist = false;
             console.log(JSON.stringify(json))
-            client.query(`INSERT into product_table (url, data) Values('${fileName}', 'abc')`, function (err, result) {
-                if (handleError(err, client, done)) return
 
-                console.log('Saved successfully')
+            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+                if (handleError(err, client, done)) {
+                    console.log('error occured where select')
+                    exist = false;
+                    reject(null)
+                }
+
                 done();
-                pg.end();
-                result = true;
+                console.log(result)
+                if (result && result.rows.length > 0) {
+                    exist = true;
+                }
             });
+
+            if (exist) {
+                await client.query(`UPDATE product_table SET url = '${fileName}', data = '["abc"]' where url = '${fileName}'`, function (err, result) {
+                    if (handleError(err, client, done)) return
+
+                    console.log('Saved successfully')
+                    done();
+                    pg.end();
+                    result = true;
+                });
+            } else {
+                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '["abc"]')`, function (err, result) {
+                    if (handleError(err, client, done)) return
+
+                    console.log('Saved successfully')
+                    done();
+                    pg.end();
+                    result = true;
+                });
+            }
+
             if (result)
                 resolve('Success to Save')
             else
