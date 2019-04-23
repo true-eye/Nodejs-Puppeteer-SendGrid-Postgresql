@@ -88,7 +88,7 @@ overkillshop = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.overkillshop.com/en/sale.html?limit=150&manufacturer=445%2C5%2C841&p=${page_index}`);
+        await page.goto(`https://www.overkillshop.com/en/sale.html?limit=150&manufacturer=445%2C5%2C841&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
@@ -112,7 +112,7 @@ overkillshop = async () => {
             return { products, bLastPage: btnNextPage[0] == undefined }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.length);
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length);
 
         productList = [...productList, ...pageInfo.products]
 
