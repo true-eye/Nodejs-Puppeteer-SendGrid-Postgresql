@@ -11,7 +11,6 @@ let load_from_file = (fileName) => {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
-                next(err);
                 return true;
             };
             client.query(`CREATE TABLE IF NOT EXISTS product_table (
@@ -60,7 +59,6 @@ let save_to_file = (fileName, json) => {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
-                next(err);
                 return true;
             };
             client.query(`UPDATE product_table SET data=${JSON.stringify(json)} WHERE url = ${fileName}`, function (err, result) {
