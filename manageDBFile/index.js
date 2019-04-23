@@ -40,13 +40,13 @@ let load_from_file = (fileName) => {
                             return false;
                         } else {
                             json = JSON.parse(result.rows[0].data)
-                            console.log('original product count: ', json.length);
                             return true;
                         }
                     }
                 }
             });
 
+            console.log('original product count: ', json.length);
             resolve(json);
         });
 
@@ -71,7 +71,7 @@ let save_to_file = (fileName, json) => {
                 done(client);
                 return true;
             };
-            client.query(`UPDATE product_table SET data=${JSON.stringify(json)} WHERE url = ${fileName}`, function (err, result) {
+            client.query(`INSERT into product_table (url, data) Values(${fileName}, ${JSON.stringify(json)})`, function (err, result) {
                 if (handleError(err, client, done)) reject(null);
 
                 console.log('Saved successfully')
