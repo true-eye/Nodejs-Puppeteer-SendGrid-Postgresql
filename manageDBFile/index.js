@@ -24,6 +24,13 @@ let load_from_file = (fileName) => {
                         reject(null);
                     }
                 })
+            await client.query(`UPDATE product_table SET url = '${fileName}', data = '[{"ref":"abc", "title":"ttt", "price":"$20"}]' where url = '${fileName}'`, function (err, result) {
+                if (handleError(err, client, done)) return
+
+                console.log('Saved successfully')
+                done();
+                result = true;
+            });
             await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
