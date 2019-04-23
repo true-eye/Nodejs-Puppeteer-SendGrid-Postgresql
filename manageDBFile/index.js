@@ -71,15 +71,16 @@ let save_to_file = (fileName, json) => {
                 done(client);
                 return true;
             };
-            const result = client.query(`INSERT into product_table (url, data) Values('${fileName}', "${JSON.stringify(json)}")`, function (err, result) {
-                if (handleError(err, client, done)) return null;
+            const result = false;
+            client.query(`INSERT into product_table (url, data) Values('${fileName}', "${JSON.stringify(json)}")`, function (err, result) {
+                if (handleError(err, client, done)) return
 
                 console.log('Saved successfully')
                 done();
                 pg.end();
-                return true;
+                result = true;
             });
-            if (result != null)
+            if (result)
                 resolve('Success to Save')
             else
                 reject(null)
