@@ -78,7 +78,7 @@ let save_to_file = (fileName, json) => {
                 done(client);
                 return true;
             };
-            const result = false;
+            const res = false;
             let exist = false;
             // console.log(JSON.stringify(json))
 
@@ -90,33 +90,34 @@ let save_to_file = (fileName, json) => {
                 }
 
                 done();
-                console.log(result)
                 if (result && result.rows.length > 0) {
                     exist = true;
                 }
             });
 
             if (exist) {
-                await client.query(`UPDATE product_table SET url = '${fileName}', data = '["abc"]' where url = '${fileName}'`, function (err, result) {
+                await client.query(`UPDATE product_table SET url = '${fileName}', data = '${JSON.stringify(json)}' where url = '${fileName}'`, function (err, result) {
                     if (handleError(err, client, done)) return
 
-                    console.log('Saved successfully')
+                    console.log('Update successfully')
                     done();
                     pg.end();
-                    result = true;
+                    res = true;
+                    resolve('Success to Update')
                 });
             } else {
-                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '["abc"]')`, function (err, result) {
+                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '${JSON.stringify(json)}')`, function (err, result) {
                     if (handleError(err, client, done)) return
 
-                    console.log('Saved successfully')
+                    console.log('Insert successfully')
                     done();
                     pg.end();
-                    result = true;
+                    res = true;
+                    resolve('Success to Insert')
                 });
             }
 
-            if (result)
+            if (res)
                 resolve('Success to Save')
             else
                 reject(null)
