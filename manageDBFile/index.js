@@ -96,8 +96,8 @@ let save_to_file = (fileName, json) => {
             });
 
             if (exist) {
-                await client.query(`UPDATE product_table SET url = '${fileName}', data = '${JSON.stringify(json)}' where url = '${fileName}'`, function (err, result) {
-                    if (handleError(err, client, done)) return
+                await client.query(`UPDATE product_table SET url = '${fileName}', data = '[]' where url = '${fileName}'`, function (err, result) {
+                    if (handleError(err, client, done)) reject(null)
 
                     console.log('Update successfully')
                     done();
@@ -105,8 +105,8 @@ let save_to_file = (fileName, json) => {
                     res = true;
                 });
             } else {
-                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '${JSON.stringify(json)}')`, function (err, result) {
-                    if (handleError(err, client, done)) return
+                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '[]')`, function (err, result) {
+                    if (handleError(err, client, done)) reject(null)
 
                     console.log('Insert successfully')
                     done();
