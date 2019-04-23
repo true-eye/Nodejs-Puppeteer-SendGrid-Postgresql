@@ -7,13 +7,13 @@ const fs = require("fs");
 let load_from_file = (fileName) => {
     return new Promise((resolve, reject) => {
         var pg = require('pg');
-        pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        const client = pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
                 return true;
             };
-            client.query(`CREATE TABLE IF NOT EXISTS product_table (
+            await client.query(`CREATE TABLE IF NOT EXISTS product_table (
                 url varchar(25),  
                 data text,
                 PRIMARY KEY (url)  
@@ -23,7 +23,7 @@ let load_from_file = (fileName) => {
                         reject(null);
                     }
                 })
-            client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     reject(null);
@@ -39,10 +39,14 @@ let load_from_file = (fileName) => {
                             let json = [];
                             resolve(json)
                         } else {
-                            let json = JSON.parse(result.rows[0])
+                            let json = JSON.parse(result.rows[0].data)
                             console.log('original product count: ', json.length);
                             resolve(json)
                         }
+                    } else {
+                        console.log('error length is not 1')
+                        let json = [];
+                        resolve(json)
                     }
                 } else {
                     let json = [];
