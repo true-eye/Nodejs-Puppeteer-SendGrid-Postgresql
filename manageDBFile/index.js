@@ -24,7 +24,7 @@ let load_from_file = (fileName) => {
                         reject(null);
                     }
                 })
-            await client.query(`SELECT * FROM product_table where url = ${fileName}`, function (err, result) {
+            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     reject(null);
