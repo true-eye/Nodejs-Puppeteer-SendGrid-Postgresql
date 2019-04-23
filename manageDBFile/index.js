@@ -22,29 +22,33 @@ let load_from_file = (fileName) => {
                         console.log('error occured')
                         reject(null);
                     }
-
-                    client.query(`SELECT * FROM product_table where url = ${fileName}`, function (err, result) {
-                        if (handleError(err, client, done)) {
-                            console.log('error occured where select')
-                            reject(null);
-                        }
-
-                        done();
-                        pg.end();
-                        console.log(result)
-
-                        if (result.rows.length > 0) {
-                            if (result.rows.length != 1) {
-                                console.log('error length is not 1')
-                            } else {
-                                let json = JSON.parse(result.rows[0])
-                                console.log('original product count: ', json.length);
-                                resolve(json)
-                            }
-                        }
-                        reject(null);
-                    });
                 })
+            client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+                if (handleError(err, client, done)) {
+                    console.log('error occured where select')
+                    reject(null);
+                }
+
+                done();
+                pg.end();
+                console.log(result)
+                if (result) {
+                    if (result.rows.length > 0) {
+                        if (result.rows.length != 1) {
+                            console.log('error length is not 1')
+                            let json = [];
+                            resolve(json)
+                        } else {
+                            let json = JSON.parse(result.rows[0])
+                            console.log('original product count: ', json.length);
+                            resolve(json)
+                        }
+                    }
+                } else {
+                    let json = [];
+                    resolve(json)
+                }
+            });
         });
 
         // fs.readFile("./" + fileName, function (err, text) {
