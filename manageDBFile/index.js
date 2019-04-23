@@ -18,10 +18,16 @@ let load_from_file = (fileName) => {
                 data text,
                 PRIMARY KEY (url)  
             )`, function (err, result) {
-                    if (handleError(err, client, done)) reject(null);
+                    if (handleError(err, client, done)) {
+                        console.log('error occured')
+                        reject(null);
+                    }
 
                     client.query(`SELECT * FROM product_table where url = ${fileName}`, function (err, result) {
-                        if (handleError(err, client, done)) reject(null);
+                        if (handleError(err, client, done)) {
+                            console.log('error occured where select')
+                            reject(null);
+                        }
 
                         done();
                         pg.end();
