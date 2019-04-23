@@ -111,7 +111,7 @@ overkillshop = async () => {
             return { products, bLastPage: btnNextPage[0] == undefined }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`);
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo);
 
         productList = [...productList, ...pageInfo.products]
 
