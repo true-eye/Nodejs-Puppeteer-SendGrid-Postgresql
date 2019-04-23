@@ -103,7 +103,6 @@ let save_to_file = (fileName, json) => {
                     done();
                     pg.end();
                     res = true;
-                    resolve('Success to Update')
                 });
             } else {
                 await client.query(`INSERT into product_table (url, data) Values('${fileName}', '${JSON.stringify(json)}')`, function (err, result) {
@@ -113,14 +112,10 @@ let save_to_file = (fileName, json) => {
                     done();
                     pg.end();
                     res = true;
-                    resolve('Success to Insert')
                 });
             }
 
-            if (res)
-                resolve('Success to Save')
-            else
-                reject(null)
+            resolve('Success to Save')
         });
 
         // fs.writeFile("./" + fileName, JSON.stringify(json), function (err) {
