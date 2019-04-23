@@ -13,6 +13,7 @@ let load_from_file = (fileName) => {
                 done(client);
                 return true;
             };
+            let json = [];
             await client.query(`CREATE TABLE IF NOT EXISTS product_table (
                 url varchar(25),  
                 data text,
@@ -36,24 +37,17 @@ let load_from_file = (fileName) => {
                     if (result.rows.length > 0) {
                         if (result.rows.length != 1) {
                             console.log('error length is not 1')
-                            let json = [];
-                            resolve(json)
+                            return false;
                         } else {
-                            let json = JSON.parse(result.rows[0].data)
+                            json = JSON.parse(result.rows[0].data)
                             console.log('original product count: ', json.length);
-                            resolve(json)
+                            return true;
                         }
-                    } else {
-                        console.log('error length is not 1')
-                        let json = [];
-                        resolve(json)
                     }
-                } else {
-                    let json = [];
-                    resolve(json)
                 }
             });
         });
+        resolve(json);
 
         // fs.readFile("./" + fileName, function (err, text) {
         //     if (!err) {
