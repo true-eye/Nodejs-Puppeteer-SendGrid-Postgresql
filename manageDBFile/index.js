@@ -46,8 +46,9 @@ let load_from_file = (fileName) => {
                     }
                 }
             });
+
+            resolve(json);
         });
-        resolve(json);
 
         // fs.readFile("./" + fileName, function (err, text) {
         //     if (!err) {
