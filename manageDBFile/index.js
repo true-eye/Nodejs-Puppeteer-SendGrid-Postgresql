@@ -1,12 +1,12 @@
 
 const fs = require("fs");
 
-var pg = require('pg');
+
 
 
 let load_from_file = (fileName) => {
     return new Promise((resolve, reject) => {
-
+        var pg = require('pg');
         pg.connect(process.env.DATABASE_URL, function (err, client, done) {
             var handleError = function (err) {
                 if (!err) return false;
@@ -54,6 +54,7 @@ let load_from_file = (fileName) => {
 }
 let save_to_file = (fileName, json) => {
     return new Promise((resolve, reject) => {
+        var pg = require('pg');
 
         pg.connect(process.env.DATABASE_URL, function (err, client, done) {
             var handleError = function (err) {
