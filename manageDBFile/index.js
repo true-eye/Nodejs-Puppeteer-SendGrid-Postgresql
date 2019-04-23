@@ -72,13 +72,13 @@ let save_to_file = (fileName, json) => {
     return new Promise((resolve, reject) => {
         var pg = require('pg');
 
-        pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
+        await pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
                 return true;
             };
-            const res = false;
+            let res = false;
             let exist = false;
             // console.log(JSON.stringify(json))
 
@@ -115,8 +115,13 @@ let save_to_file = (fileName, json) => {
                 });
             }
 
-            resolve('Success to Save')
+            if (res)
+                resolve('Success to Save')
+            else
+                reject(null)
         });
+
+        console.log('hello')
 
         // fs.writeFile("./" + fileName, JSON.stringify(json), function (err) {
         //     if (!err) {

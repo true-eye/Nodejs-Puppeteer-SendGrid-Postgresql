@@ -53,6 +53,7 @@ scrap_onenessboutique = async (func_name) => {
                     }).catch(err => {
                         console.log(func_name, " saveToFile return error : ", err)
                     })
+                console.log('Welcome')
             }
             return message
         }).catch(err => {
