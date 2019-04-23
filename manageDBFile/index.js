@@ -73,7 +73,7 @@ let save_to_file = (fileName, json) => {
             };
             const result = false;
             console.log(JSON.stringify(json))
-            client.query(`INSERT into product_table (url, data) Values('${fileName}', '${JSON.stringify(json)}')`, function (err, result) {
+            client.query(`INSERT into product_table (url, data) Values('${fileName}', 'abc')`, function (err, result) {
                 if (handleError(err, client, done)) return
 
                 console.log('Saved successfully')
