@@ -99,8 +99,11 @@ onenessboutique = async () => {
                 if (product.firstElementChild && product.lastElementChild && product.lastElementChild.firstElementChild) {
                     if (product.parentElement) {
                         const productRef = product.parentElement.getAttribute('href');
-                        const productTitle = product.firstElementChild.innerHTML;
+                        let productTitle = product.firstElementChild.innerHTML;
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const productPrice = product.lastElementChild.firstElementChild.innerHTML;
+
                         if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
                             products.push({ ref: "https://www.onenessboutique.com" + productRef, title: productTitle, price: productPrice });
                     }
@@ -114,8 +117,8 @@ onenessboutique = async () => {
 
         productList = [...productList, ...pageInfo.products]
 
-        if (pageInfo.bLastPage == true)
-            break;
+        //if (pageInfo.bLastPage == true)
+        break;
         page_index++;
     }
 
