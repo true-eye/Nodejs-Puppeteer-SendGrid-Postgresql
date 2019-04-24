@@ -99,7 +99,7 @@ let save_to_file = (fileName, json) => {
                 }
 
                 const data = JSON.stringify(json)
-                console.log(data)
+                //console.log(data)
                 if (result && result.rows.length > 0) {
                     client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, update_result) {
                         if (handleError(err, client, done)) {

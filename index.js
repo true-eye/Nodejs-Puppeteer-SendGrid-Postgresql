@@ -51,16 +51,16 @@ let allWebsites = async () => {
     message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
     message += await module_jimmyjazz.scrap_jimmyjazz("scrap_jimmyjazz");   //complete
     message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
-    message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
+    //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
     message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
     message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop"); //completed
-    // message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
-    // message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
-    // message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
-    // message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
-    // message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
-    // message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
+    message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
+    message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
+    message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
+    message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
+    message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
+    message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
 
     //message += await module_hibbett_men.scrap_hibbett_men("scrap_hibbett_men");
     const sgMail = require('@sendgrid/mail');
