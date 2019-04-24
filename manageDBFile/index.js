@@ -96,10 +96,14 @@ let save_to_file = (fileName, json) => {
                     reject(null)
                 }
 
-                const data = JSON.stringify(json)
+                //const data = JSON.stringify(json)
+                const data = '[{"ref":"https://www.onenessboutique.com/collections/sale/products/air-jordan-1-td-mid-football-cleats-shadow-black-soft-grey-white-ar5604-002","title":"Air Jordan 1 TD Mid Football Cleats - Shadow","price":"$95.00"},{"ref":"https://www.onenessboutique.com/collections/sale/products/air-jordan-1-td-mid-football-cleats-royal-black-white-ar5604-041","title":"Air Jordan 1 TD Mid Football Cleats - Royal","price":"$95.00"}]'
                 if (result && result.rows.length > 0) {
                     client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, update_result) {
-                        if (handleError(err, client, done)) reject(null)
+                        if (handleError(err, client, done)) {
+                            console.log('update error')
+                            reject(null)
+                        }
 
                         console.log('Update successfully', update_result)
                         done();
@@ -108,7 +112,10 @@ let save_to_file = (fileName, json) => {
                     });
                 } else {
                     client.query(`INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`, function (err, insert_result) {
-                        if (handleError(err, client, done)) reject(null)
+                        if (handleError(err, client, done)) {
+                            console.log('insert error')
+                            reject(null)
+                        }
 
                         console.log('Insert successfully', insert_result)
                         done();
