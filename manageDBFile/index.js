@@ -14,6 +14,7 @@ let load_from_file = (fileName) => {
                 return true;
             };
             let json = [];
+            await client.query(`DROP TABLE product_table)`, function (err, result) { })
             await client.query(`CREATE TABLE IF NOT EXISTS product_table (
                 url varchar(25),  
                 data json,
@@ -23,7 +24,9 @@ let load_from_file = (fileName) => {
                         console.log('error occured')
                         reject(null);
                     }
-                })
+                }
+            )
+
             // await client.query(`UPDATE product_table SET url = '${fileName}', data = '[{"ref":"abc", "title":"ttt", "price":"$20"}]' where url = '${fileName}'`, function (err, result) {
             //     if (handleError(err, client, done)) return
 
