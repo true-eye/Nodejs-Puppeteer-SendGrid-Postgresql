@@ -100,7 +100,8 @@ let save_to_file = (fileName, json) => {
 
                 //const data = JSON.stringify(json)
                 let data = '[{"ref":"https://www.onenessboutique.com/collections/sale/products/nike-air-zoom-sprdn-2","title":"NIKE AIR ZOOM SPRDN QS \"SUMMER PACK\" - TURBO GREEN","price":"$110.00"}]'
-                data.replace('\"', '')
+                data.replace('\\"', '')
+                console.log(data)
                 if (result && result.rows.length > 0) {
                     client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, update_result) {
                         if (handleError(err, client, done)) {
