@@ -97,7 +97,7 @@ let save_to_file = (fileName, json) => {
                 }
 
                 //const data = JSON.stringify(json)
-                const data = '[{"ref":"https://www.onenessboutique.com/collections/sale/products/air-jordan-1-td-mid-football-cleats-shadow-black-soft-grey-white-ar5604-002","title":"Air Jordan 1 TD Mid Football Cleats - Shadow","price":"$95.00"},{"ref":"https://www.onenessboutique.com/collections/sale/products/air-jordan-1-td-mid-football-cleats-royal-black-white-ar5604-041","title":"Air Jordan 1 TD Mid Football Cleats - Royal","price":"$95.00"}]'
+                const data = '[{"ref":"https://www.onenessboutique.com/collections/sale/products/nike-air-zoom-sprdn-2","title":"NIKE AIR ZOOM SPRDN QS \"SUMMER PACK\" - TURBO GREEN","price":"$110.00"}]'
                 if (result && result.rows.length > 0) {
                     client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, update_result) {
                         if (handleError(err, client, done)) {
