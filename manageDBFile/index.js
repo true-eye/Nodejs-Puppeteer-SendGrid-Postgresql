@@ -14,7 +14,11 @@ let load_from_file = (fileName) => {
                 return true;
             };
             let json = [];
-            await client.query(`DROP TABLE product_table)`, function (err, result) {
+            await client.query(`DROP TABLE product_table`, function (err, result) {
+                if (handleError(err, client, done)) {
+                    console.log('error occured while dropping')
+                    reject(null);
+                }
                 console.log(err, result)
             })
             await client.query(`CREATE TABLE IF NOT EXISTS product_table (
