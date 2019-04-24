@@ -78,54 +78,45 @@ let load_from_file = (fileName) => {
     })
 }
 let save_to_file = (fileName, json) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         var pg = require('pg');
 
-        await pg.connect(process.env.DATABASE_URL, async function (err, client, done) {
+        pg.connect(process.env.DATABASE_URL, function (err, client, done) {
             var handleError = function (err) {
                 if (!err) return false;
                 done(client);
                 return true;
             };
-            let res = false;
-            let exist = false;
             // console.log(JSON.stringify(json))
 
-            await client.query(`SELECT * FROM product_table_json where url = '${fileName}'`, function (err, result) {
+            client.query(`SELECT * FROM product_table_json where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     exist = false;
                     reject(null)
                 }
 
-                done();
+                const data = JSON.stringify(json)
                 if (result && result.rows.length > 0) {
-                    exist = true;
+                    client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, update_result) {
+                        if (handleError(err, client, done)) reject(null)
+
+                        console.log('Update successfully', update_result)
+                        done();
+                        pg.end();
+                        resolve('Success to Save')
+                    });
+                } else {
+                    client.query(`INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`, function (err, insert_result) {
+                        if (handleError(err, client, done)) reject(null)
+
+                        console.log('Insert successfully', insert_result)
+                        done();
+                        pg.end();
+                        resolve('Success to Save')
+                    });
                 }
             });
-
-            const data = JSON.stringify(json)
-
-            if (exist) {
-                await client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, result) {
-                    if (handleError(err, client, done)) reject(null)
-
-                    console.log('Update successfully')
-                    //done();
-                    pg.end();
-                    res = true;
-                });
-            } else {
-                await client.query(`INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`, function (err, result) {
-                    if (handleError(err, client, done)) reject(null)
-
-                    console.log('Insert successfully')
-                    //done();
-                    pg.end();
-                    res = true;
-                });
-            }
-            resolve('Success to Save')
         });
 
         console.log('hello')
