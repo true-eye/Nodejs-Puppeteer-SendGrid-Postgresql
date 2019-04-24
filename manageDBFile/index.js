@@ -55,7 +55,7 @@ let load_from_file = (fileName) => {
                             console.log('error length is not 1')
                             return false;
                         } else {
-                            json = JSON.parse(result.rows[0].data)
+                            json = result.rows[0].data
                             return true;
                         }
                     }
