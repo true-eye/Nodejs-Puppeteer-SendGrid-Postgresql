@@ -16,7 +16,7 @@ let load_from_file = (fileName) => {
             let json = [];
             await client.query(`CREATE TABLE IF NOT EXISTS product_table (
                 url varchar(25),  
-                data text,
+                data json,
                 PRIMARY KEY (url)  
             )`, function (err, result) {
                     if (handleError(err, client, done)) {
