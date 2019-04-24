@@ -117,8 +117,8 @@ onenessboutique = async () => {
 
         productList = [...productList, ...pageInfo.products]
 
-        //if (pageInfo.bLastPage == true)
-        break;
+        if (pageInfo.bLastPage == true)
+            break;
         page_index++;
     }
 
