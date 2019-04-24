@@ -108,7 +108,7 @@ let save_to_file = (fileName, json) => {
                             return;
                         }
 
-                        console.log('Update successfully', update_result)
+                        console.log('Update successfully')
                         done();
                         pg.end();
                         resolve('Success to Save')
@@ -121,7 +121,7 @@ let save_to_file = (fileName, json) => {
                             return;
                         }
 
-                        console.log('Insert successfully', insert_result)
+                        console.log('Insert successfully')
                         done();
                         pg.end();
                         resolve('Success to Save')
