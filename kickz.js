@@ -102,7 +102,9 @@ kickz = async () => {
                     const div_price = div_detail_link_wrapper.children[2];
 
                     if (div_headline && div_price) {
-                        const productTitle = div_headline.innerText;
+                        let productTitle = div_headline.innerText;
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const productPrice = div_price.lastElementChild.innerText;
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }

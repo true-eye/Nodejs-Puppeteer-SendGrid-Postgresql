@@ -95,7 +95,10 @@ sneakerpolitics = async () => {
             const productDetails = document.querySelectorAll('.twelve > .thumbnail > a');
             for (var product of productDetails) {
                 const productRef = "https://sneakerpolitics.com" + product.getAttribute('href');
-                const productTitle = product.getAttribute('title');
+                let productTitle = product.getAttribute('title');
+
+                productTitle = productTitle.split('"').join('');
+                productTitle = productTitle.replace(/'/g, '')
 
                 if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN')) {
                     const div_info = product.children[1];

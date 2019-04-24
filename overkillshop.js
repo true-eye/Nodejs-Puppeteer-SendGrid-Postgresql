@@ -100,7 +100,9 @@ overkillshop = async () => {
 
                 if (div_href && div_price_box) {
                     const productRef = div_href.getAttribute('href');
-                    const productTitle = div_href.getAttribute('title');
+                    let productTitle = div_href.getAttribute('title');
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
                     const div_special_price = div_price_box.children[0];
                     if (div_special_price) {
                         const productPrice = div_special_price.firstElementChild.innerText;

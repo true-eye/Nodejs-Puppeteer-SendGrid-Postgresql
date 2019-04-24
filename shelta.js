@@ -93,7 +93,9 @@ shelta = async () => {
         const bLastPage = response.ProductsInPage != response.PageSize;
         const productItems = response.ProductItems.map(item => {
             const productRef = item.ProductUrl;
-            const productTitle = item.Name;
+            let productTitle = item.Name;
+            productTitle = productTitle.split('"').join('');
+            productTitle = productTitle.replace(/'/g, '')
             const productPrice = item.Price;
 
             return { ref: productRef, title: productTitle, price: productPrice }

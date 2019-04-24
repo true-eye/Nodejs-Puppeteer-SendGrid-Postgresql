@@ -104,7 +104,10 @@ finishline_men = async () => {
 
                     if (element.firstElementChild && element.nextElementSibling && element.nextElementSibling.lastElementChild) {
                         const productRef = element.getAttribute('href');
-                        const productTitle = element.firstElementChild.innerHTML;
+                        let productTitle = element.firstElementChild.innerHTML;
+
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
 
                         element = element.nextElementSibling;
                         const productPrice = element.lastElementChild.innerHTML;

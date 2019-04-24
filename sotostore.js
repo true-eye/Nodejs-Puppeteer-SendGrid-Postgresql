@@ -101,7 +101,10 @@ sotostore = async () => {
                     const productVendor = div_brand.innerText;
                     if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
                         const productRef = "https://www.sotostore.com" + product.getAttribute('href');
-                        const productTitle = productVendor + " " + div_name.innerText;
+                        let productTitle = productVendor + " " + div_name.innerText;
+
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const productPrice = div_price.lastElementChild.children[1].innerText;
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }

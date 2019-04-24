@@ -105,6 +105,8 @@ citygear = async () => {
                         var div_productName_a = div_productName.firstElementChild;
                         productRef = div_productName_a.getAttribute('href');
                         productTitle = div_productName_a.innerText;
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                     }
 
                     var div_pricebox = div_productName.nextElementSibling;

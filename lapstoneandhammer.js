@@ -101,7 +101,9 @@ lapstoneandhammer = async () => {
                     const productVendor = div_brand.innerText;
                     if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
                         const productRef = "https://www.lapstoneandhammer.com" + div_name.firstElementChild.getAttribute('href');
-                        const productTitle = productVendor + " " + div_name.innerText;
+                        let productTitle = productVendor + " " + div_name.innerText;
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const div_money = div_price.firstElementChild;
                         const productPrice = div_money != null ? div_money.innerText : div_price.innerHTML;
                         products.push({ ref: productRef, title: productTitle, price: productPrice });

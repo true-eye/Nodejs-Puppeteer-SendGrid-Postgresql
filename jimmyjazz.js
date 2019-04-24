@@ -138,6 +138,9 @@ jimmyjazz = async () => {
                             if (div_productgrid_title_a.lastElementChild) {
                                 var div_product_size = div_productgrid_title_a.lastElementChild
                                 productTitle = div_productgrid_brand_a.innerText + div_productgrid_title_a.innerText;
+
+                                productTitle = productTitle.split('"').join('');
+                                productTitle = productTitle.replace(/'/g, '')
                             }
 
                         } else {

@@ -100,7 +100,9 @@ asphaltgold = async () => {
                 if (div_product_name && div_product_price) {
                     const div_href = div_product_name.firstElementChild;
                     const productRef = div_href.getAttribute('href');
-                    const productTitle = div_href.getAttribute('title');
+                    let productTitle = div_href.getAttribute('title');
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
 
                     const div_special_price = div_product_price.lastElementChild;
                     if (div_special_price) {

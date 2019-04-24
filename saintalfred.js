@@ -102,7 +102,9 @@ saintalfred = async () => {
                     const productVendor = div_item_vendor.innerText;
                     if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
                         const productRef = "https://www.saintalfred.com" + div_item_title.firstElementChild.getAttribute('href');
-                        const productTitle = productVendor + ' ' + div_item_title.innerText;
+                        let productTitle = productVendor + ' ' + div_item_title.innerText;
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const productPrice = div_item_price.firstElementChild.firstElementChild.innerText;
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }

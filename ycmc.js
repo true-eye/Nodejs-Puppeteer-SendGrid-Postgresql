@@ -100,7 +100,10 @@ ycmc = async () => {
                 if (div_product_name && div_product_price) {
                     const div_href = div_product_name.firstElementChild;
                     const productRef = div_href.getAttribute('href');
-                    const productTitle = div_href.innerText;
+                    let productTitle = div_href.innerText;
+
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
 
                     if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN')) {
                         const div_special_price = div_product_price.lastElementChild;

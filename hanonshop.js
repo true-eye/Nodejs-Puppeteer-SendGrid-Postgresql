@@ -99,7 +99,10 @@ hanonshop = async () => {
                 const div_price = product.children[1];
                 if (div_name && div_price) {
                     const productRef = "https://www.hanon-shop.com" + div_name.firstElementChild.getAttribute('href');
-                    const productTitle = div_name.firstElementChild.innerText;
+                    let productTitle = div_name.firstElementChild.innerText;
+
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
 
                     if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN')) {
                         const productPrice = div_price.firstElementChild.innerText;

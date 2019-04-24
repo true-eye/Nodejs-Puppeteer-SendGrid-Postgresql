@@ -102,7 +102,9 @@ notreshop = async () => {
                     const productVendor = div_brand.innerText;
                     if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
                         const productRef = "https://www.notre-shop.com" + div_title.firstElementChild.getAttribute('href');
-                        const productTitle = div_title.firstElementChild.getAttribute('title');
+                        let productTitle = div_title.firstElementChild.getAttribute('title');
+                        productTitle = productTitle.split('"').join('');
+                        productTitle = productTitle.replace(/'/g, '')
                         const productPrice = div_price.firstElementChild.innerText;
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
