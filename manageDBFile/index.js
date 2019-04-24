@@ -14,14 +14,14 @@ let load_from_file = (fileName) => {
                 return true;
             };
             let json = [];
-            await client.query(`DROP TABLE product_table`, function (err, result) {
-                if (handleError(err, client, done)) {
-                    console.log('error occured while dropping')
-                    reject(null);
-                }
-                console.log(err, result)
-            })
-            await client.query(`CREATE TABLE IF NOT EXISTS product_table (
+            // await client.query(`DROP TABLE product_table`, function (err, result) {
+            //     if (handleError(err, client, done)) {
+            //         console.log('error occured while dropping')
+            //         reject(null);
+            //     }
+            //     console.log(err, result)
+            // })
+            await client.query(`CREATE TABLE IF NOT EXISTS product_table_json (
                 url varchar(25),  
                 data json,
                 PRIMARY KEY (url)  
@@ -40,7 +40,7 @@ let load_from_file = (fileName) => {
             //     done();
             //     result = true;
             // });
-            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+            await client.query(`SELECT * FROM product_table_json where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     reject(null);
@@ -91,7 +91,7 @@ let save_to_file = (fileName, json) => {
             let exist = false;
             // console.log(JSON.stringify(json))
 
-            await client.query(`SELECT * FROM product_table where url = '${fileName}'`, function (err, result) {
+            await client.query(`SELECT * FROM product_table_json where url = '${fileName}'`, function (err, result) {
                 if (handleError(err, client, done)) {
                     console.log('error occured where select')
                     exist = false;
@@ -107,7 +107,7 @@ let save_to_file = (fileName, json) => {
             const data = JSON.stringify(json)
 
             if (exist) {
-                await client.query(`UPDATE product_table SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, result) {
+                await client.query(`UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`, function (err, result) {
                     if (handleError(err, client, done)) reject(null)
 
                     console.log('Update successfully')
@@ -116,7 +116,7 @@ let save_to_file = (fileName, json) => {
                     res = true;
                 });
             } else {
-                await client.query(`INSERT into product_table (url, data) Values('${fileName}', '${data}')`, function (err, result) {
+                await client.query(`INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`, function (err, result) {
                     if (handleError(err, client, done)) reject(null)
 
                     console.log('Insert successfully')
