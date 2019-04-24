@@ -14,7 +14,9 @@ let load_from_file = (fileName) => {
                 return true;
             };
             let json = [];
-            await client.query(`DROP TABLE product_table)`, function (err, result) { })
+            await client.query(`DROP TABLE product_table)`, function (err, result) {
+                console.log(err, result)
+            })
             await client.query(`CREATE TABLE IF NOT EXISTS product_table (
                 url varchar(25),  
                 data json,
