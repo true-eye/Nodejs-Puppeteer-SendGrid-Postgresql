@@ -111,7 +111,7 @@ let save_to_file = (fileName, json) => {
                     if (handleError(err, client, done)) reject(null)
 
                     console.log('Update successfully')
-                    done();
+                    //done();
                     pg.end();
                     res = true;
                 });
@@ -120,13 +120,11 @@ let save_to_file = (fileName, json) => {
                     if (handleError(err, client, done)) reject(null)
 
                     console.log('Insert successfully')
-                    done();
+                    //done();
                     pg.end();
                     res = true;
                 });
             }
-
-            console.log('end')
             resolve('Success to Save')
         });
 
