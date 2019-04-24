@@ -126,10 +126,8 @@ let save_to_file = (fileName, json) => {
                 });
             }
 
-            if (res)
-                resolve('Success to Save')
-            else
-                reject(null)
+            console.log('end')
+            resolve('Success to Save')
         });
 
         console.log('hello')
