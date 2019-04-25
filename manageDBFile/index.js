@@ -49,7 +49,7 @@ let load_from_file = (fileName) => {
 
                 done();
                 pg.end();
-                console.log(result)
+                //console.log(result)
                 if (result) {
                     if (result.rows.length > 0) {
                         if (result.rows.length != 1) {
