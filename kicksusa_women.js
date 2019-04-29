@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_saintalfred = async (func_name) => {
+scrap_kicksusa_women = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">saintalfred.com</h2>`
-    let ret = await manageDBFile.load_from_file("saintalfred.json").then(prevList => {
-        return saintalfred().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">kicksusa_women.com</h2>`
+    let ret = await manageDBFile.load_from_file("kicksusa_women.json").then(prevList => {
+        return kicksusa_women().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -45,9 +45,10 @@ scrap_saintalfred = async (func_name) => {
             }
 
             // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
+            //if (prevList.length == 0 || changedFlag == true) 
+
             {
-                manageDBFile.save_to_file("saintalfred.json", currentList)
+                manageDBFile.save_to_file("kicksusa_women.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +57,7 @@ scrap_saintalfred = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' saintalfred return error : ', err)
+            console.log(func_name, ' kicksusa_women return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +67,7 @@ scrap_saintalfred = async (func_name) => {
     return ret;
 }
 
-saintalfred = async () => {
+kicksusa_women = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -86,35 +87,45 @@ saintalfred = async () => {
 
     let page_index = 1;
 
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+
     while (1) {
-        await page.goto(`https://www.saintalfred.com/collections/sale?page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.kicksusa.com/sale-womens-shoes.html?brands=78&limit=36%3Fp%3D1&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.pagination > .pagination-next a');
-            const productDetails = document.querySelectorAll('.collection-products > .product-list-item > .product-list-item-details');
+            const productDetails = document.querySelectorAll('.products-grid > li > .item > .item-info');
             for (var product of productDetails) {
-                const div_item_vendor = product.children[0];
-                const div_item_title = product.children[1];
-                const div_item_price = product.children[2];
+                const div_show = product.children[0];
+                const div_price = product.children[1];
+                if (div_show && div_price) {
+                    const productRef = div_show.firstElementChild.getAttribute('href');
+                    let productTitle = div_show.firstElementChild.getAttribute('title');
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
 
-                if (div_item_vendor && div_item_title && div_item_price) {
-                    const productVendor = div_item_vendor.innerText;
-                    if (productVendor.toUpperCase().includes('NIKE') || productVendor.toUpperCase().includes('JORDAN')) {
-                        const productRef = "https://www.saintalfred.com" + div_item_title.firstElementChild.getAttribute('href');
-                        let productTitle = productVendor + ' ' + div_item_title.innerText;
-                        productTitle = productTitle.split('"').join('');
-                        productTitle = productTitle.replace(/'/g, '')
-                        const productPrice = div_item_price.firstElementChild.firstElementChild.innerText;
+                    const div_special_price = div_price.getElementsByClassName('special-price')[0];
+                    const div_regular_price = div_price.getElementsByClassName('regular-price')[0];
+                    if (div_special_price) {
+                        const productPrice = div_special_price.lastElementChild.innerText
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
+                    } else {
+                        if (div_regular_price) {
+                            const productPrice = div_regular_price.firstElementChild.innerText
+                            products.push({ ref: productRef, title: productTitle, price: productPrice });
+                        } else {
+                            const productPrice = "SEE CART FOR PRICE"
+                            products.push({ ref: productRef, title: productTitle, price: productPrice });
+                        }
                     }
+
                 }
             }
 
-            return { products, bLastPage: btnNextPage[0] == undefined }
+            return { products, bLastPage: products.length != 36 }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`);
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, ...pageInfo.products.map(p => p.price));
 
         productList = [...productList, ...pageInfo.products]
 
@@ -128,5 +139,5 @@ saintalfred = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_saintalfred = scrap_saintalfred;
-exports.saintalfred = saintalfred;
+exports.scrap_kicksusa_women = scrap_kicksusa_women;
+exports.kicksusa_women = kicksusa_women;
