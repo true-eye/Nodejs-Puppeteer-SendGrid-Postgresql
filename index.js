@@ -47,7 +47,7 @@ var transporter2 = nodemailer.createTransport(smtpTransport({
 }));*/
 
 let allWebsites = async () => {
-    let message = `hello`;
+    let message = `Start test`;
 
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
     //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
