@@ -78,16 +78,16 @@ let allWebsites = async () => {
     message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
-
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey("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");
-    const msg = {
-        to: 'hamesmodric@outlook.com',
-        from: 'buyer@arkamix.com',
-        subject: `Website Product Scrap Daily Report`,
-        html: message
-    };
-    sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));
+    /*
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey("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");
+        const msg = {
+            to: 'hamesmodric@outlook.com',
+            from: 'buyer@arkamix.com',
+            subject: `Website Product Scrap Daily Report`,
+            html: message
+        };
+        sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));*/
 
     const sgMail1 = require('@sendgrid/mail');
     sgMail1.setApiKey("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");
