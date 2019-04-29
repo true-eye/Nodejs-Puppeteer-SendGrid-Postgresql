@@ -8,6 +8,11 @@ var module_onenessboutique = require("./onenessboutique.js")
 var module_finishline_men = require("./finishline_men.js")
 var module_citygear = require("./citygear.js")
 var module_jimmyjazz = require("./jimmyjazz.js")
+
+var module_jimmyjazz_men = require("./jimmyjazz_men")
+var module_jimmyjazz_women = require("./jimmyjazz_women")
+var module_jimmyjazz_grade = require("./jimmyjazz_grade")
+
 var module_kickz = require("./kickz.js")
 var module_saintalfred = require("./saintalfred")
 var module_shelta = require("./shelta")
@@ -59,7 +64,9 @@ let allWebsites = async () => {
 
     message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
     message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
-    message += await module_jimmyjazz.scrap_jimmyjazz("scrap_jimmyjazz");   //complete
+    message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
+    message += await module_jimmyjazz_women.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
+    message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
     message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
     message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
     message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
