@@ -65,7 +65,7 @@ let allWebsites = async () => {
     message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
     message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
     message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
-    message += await module_jimmyjazz_women.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
+    message += await module_jimmyjazz_women.module_jimmyjazz_women("scrap_jimmyjazz_men");   //complete
     message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
     message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
     message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
