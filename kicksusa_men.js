@@ -5,7 +5,7 @@ var manageDBFile = require("./manageDBFile/index.js")
 
 scrap_kicksusa_men = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">kicksusa_men.com</h2>`
+    let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Men</h2>`
     let ret = await manageDBFile.load_from_file("kicksusa_men.json").then(prevList => {
         return kicksusa_men().then((currentList) => {
 

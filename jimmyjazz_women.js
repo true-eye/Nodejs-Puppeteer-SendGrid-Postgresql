@@ -15,7 +15,7 @@ scrap_jimmyjazz_women = async (func_name) => {
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
             var changedFlag = false;
-            let message = `<h2 style="background: white; color: red; text-align: center;">www.jimmyjazz_women.com</h2>`
+            let message = `<h2 style="background: white; color: red; text-align: center;"><a>www.jimmyjazz.com</a>   Women</h2>`
 
             if (prevList.length > 0) {
                 for (let i in currentList) {

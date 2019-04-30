@@ -28,6 +28,7 @@ var module_lapstoneandhammer = require("./lapstoneandhammer")
 var module_kicksusa_men = require("./kicksusa_men")
 var module_kicksusa_women = require("./kicksusa_women")
 var module_kicksusa_kids = require("./kicksusa_kids")
+var module_endclothing = require("./endclothing")
 
 app = express();
 
@@ -57,7 +58,7 @@ let allWebsites = async () => {
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
     //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
 
-
+    /*
     message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
     message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
     message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
@@ -76,6 +77,9 @@ let allWebsites = async () => {
     message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
     message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
     message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
+*/
+
+    message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*
@@ -89,7 +93,7 @@ let allWebsites = async () => {
         };
         sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));*/
 
-    const sgMail1 = require('@sendgrid/mail');
+    /*const sgMail1 = require('@sendgrid/mail');
     sgMail1.setApiKey("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");
     const msg1 = {
         to: 'buyer@arkamix.com',
@@ -97,7 +101,7 @@ let allWebsites = async () => {
         subject: `Website Product Scrap Daily Report`,
         html: message
     };
-    sgMail1.send(msg1).then(res => console.log('Successfully sent to me!')).catch(err => console.log('Failed sent to me!'));
+    sgMail1.send(msg1).then(res => console.log('Successfully sent to me!')).catch(err => console.log('Failed sent to me!'));*/
 
 }
 

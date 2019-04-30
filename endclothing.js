@@ -1,21 +1,21 @@
 
 const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
+
 var randomUseragent = require('random-useragent');
-//var request = require('request');
 const request = require('request-promise-native');
 const poll = require('promise-poller').default;
 
-scrap_jimmyjazz_men = async (func_name) => {
+scrap_endclothing = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let siteURL = "http://www.jimmyjazz_men.com/clearance?category=footwear"
-    let ret = await manageDBFile.load_from_file("jimmyjazz_men.json").then(prevList => {
-        return jimmyjazz_men().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Kids</h2>`
+    let ret = await manageDBFile.load_from_file("endclothing.json").then(prevList => {
+        return endclothing().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
             var changedFlag = false;
-            let message = `<h2 style="background: white; color: red; text-align: center;"><a>www.jimmyjazz.com</a>   Men</h2>`
+
 
             if (prevList.length > 0) {
                 for (let i in currentList) {
@@ -48,9 +48,10 @@ scrap_jimmyjazz_men = async (func_name) => {
             }
 
             // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
-            {
-                manageDBFile.save_to_file("jimmyjazz_men.json", currentList)
+            //if (prevList.length == 0 || changedFlag == true) 
+
+            if (true) {
+                manageDBFile.save_to_file("endclothing.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -59,7 +60,7 @@ scrap_jimmyjazz_men = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' jimmyjazz_men return error : ', err)
+            console.log(func_name, ' endclothing return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -69,42 +70,42 @@ scrap_jimmyjazz_men = async (func_name) => {
     return ret;
 }
 
-
-jimmyjazz_men = async () => {
+endclothing = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
         // ignoreHTTPSErrors: true,
-        headless: true,
+        headless: false,
         // timeout: 0,
-        args: [
-            '--disable-setuid-sandbox',
-            '--no-sandbox',
-        ],
+        // args: [
+        //     '--disable-setuid-sandbox',
+        //     '--no-sandbox',
+        // ],
     };
 
     const browser = await puppeteer.launch(chromeLaunchOptions);
     const page = await browser.newPage();
-    await page.setUserAgent(randomUseragent.getRandom())
 
     let productList = [];
 
     let page_index = 1;
 
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+
     while (1) {
-        await page.goto(`https://www.jimmyjazz.com/clearance?category=footwear&gender=mens&page=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+
+        await page.goto(`https://www.endclothing.com/us/sale/sale-footwear?brand=158-571910&p=${page_index}&size_toggle=small`, { waitUntil: 'domcontentloaded' });
 
         const isCaptcha = await page.evaluate(() => {
-            let gCaptcha = document.getElementById("challenge-form");
-            //let gCaptcha = document.getElementsByTagName("body");
-            return (gCaptcha != null && gCaptcha.innerHTML != '')
+            //let gCaptcha = document.getElementById("g-recaptcha-response");
+            let gCaptcha = document.querySelectorAll('.product-items');
+            return gCaptcha.length == 0
         });
 
         console.log(isCaptcha)
 
         if (isCaptcha) {
             console.log('--Entering to Captcha Mode--')
-            //const apiKey = "1a21be9ca8506169bd5b2a310457a8d0"
             const apiKey = "962808d9cfd77925df940b91ffa12ca5"
 
             const requestId = await initiateCaptchaRequest(apiKey);
@@ -113,62 +114,27 @@ jimmyjazz_men = async () => {
 
             await page.evaluate(`document.getElementById("g-recaptcha-response").innerHTML="${response}";`);
 
-            await Promise.all([page.evaluate('document.getElementById("challenge-form").submit();'), page.waitForNavigation()]);
+            await Promise.all([page.evaluate('document.getElementById("distilCaptchaForm").submit();'), page.waitForNavigation()]);
         }
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnNextPage = document.querySelectorAll('.pagination > .pagination_next > a');
-            const productDetails = document.querySelectorAll('.product_grid > .product_grid_item');
-            //return { products: document.getElementsByTagName('body')[0].innerHTML, bLastPage: btnNextPage[0] == undefined }
+            let btnNextPage = document.querySelectorAll('.pages > .c-pagination > .pages-item-next');
+            const productDetails = document.querySelectorAll('.product-items > .product-item > .product-item-info > .product-item-details');
             for (var product of productDetails) {
 
-                var productRef = null, productTitle = null, productPrice = null;
+                const div_name = product.children[0];
+                const div_color = product.children[1];
+                const div_price = product.children[2];
 
-                if (product.children[2]) {
-                    var div_productgrid_info = product.children[2];
+                if (div_name && div_color && div_price) {
+                    const productRef = div_name.firstElementChild.getAttribute('href');
+                    let productTitle = div_name.firstElementChild.innerText + ' ' + div_color.innerText;
+                    productTitle = productTitle.split('"').join('');
+                    productTitle = productTitle.replace(/'/g, '')
 
-                    if (div_productgrid_info.firstElementChild && div_productgrid_info.lastElementChild) {
-                        var div_productgrid_brand_a = div_productgrid_info.firstElementChild.firstElementChild;
-                        var div_productgrid_title_a = div_productgrid_info.lastElementChild.firstElementChild;
-
-                        if (div_productgrid_brand_a && div_productgrid_title_a) {
-                            productRef = "www.jimmyjazz_men.com" + div_productgrid_brand_a.getAttribute('href');
-
-                            if (div_productgrid_title_a.lastElementChild) {
-                                var div_product_size = div_productgrid_title_a.lastElementChild
-                                productTitle = div_productgrid_brand_a.innerText + div_productgrid_title_a.innerText;
-
-                                productTitle = productTitle.split('"').join('');
-                                productTitle = productTitle.replace(/'/g, '')
-                            }
-
-                        } else {
-                            console.log('jimmyjazz_men error occured line: 102')
-                        }
-
-                    }
-
-                    var div_pricebox = div_productgrid_info.nextElementSibling;
-
-                    if (div_pricebox) {
-                        if (div_pricebox.childElementCount == 2) {
-                            var div_product_price = div_pricebox.firstElementChild
-                            if (div_product_price) {
-                                productPrice = div_product_price.innerHTML;
-                                if (productPrice.startsWith('$'))
-                                    productPrice = productPrice.slice(1)
-                            }
-                        } else if (div_pricebox.childElementCount == 1) {
-                            console.log('jimmyjazz_men error occured line: 124')
-                        }
-                    }
-                    if (productRef && productTitle) {
-                        if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN'))
-                            products.push({ ref: productRef, title: productTitle, price: productPrice });
-                    }
-                } else {
-                    console.log('jimmyjazz_men error occured')
+                    const productPrice = div_price.firstElementChild.firstElementChild.firstElementChild.lastElementChild.innerText
+                    products.push({ ref: productRef, title: productTitle, price: productPrice });
                 }
             }
 
@@ -189,12 +155,12 @@ jimmyjazz_men = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_jimmyjazz_men = scrap_jimmyjazz_men;
-exports.jimmyjazz_men = jimmyjazz_men;
+exports.scrap_endclothing = scrap_endclothing;
+exports.endclothing = endclothing;
 
 const siteDetails = {
-    sitekey: '6LfBixYUAAAAABhdHynFUIMA_sa4s-XsJvnjtgB0',
-    pageurl: 'https://www.jimmyjazz.com/clearance?category=footwear?page=1'
+    sitekey: '6LdC3UgUAAAAAJIcyA3Ym4j_nCP-ainSgf1NoFku',
+    pageurl: 'https://www.endclothing.com/us/sale/sale-footwear'
 }
 
 async function initiateCaptchaRequest(apiKey) {
@@ -229,5 +195,4 @@ function requestCaptchaResults(apiKey, requestId) {
         });
     }
 }
-
 const timeout = millis => new Promise(resolve => setTimeout(resolve, millis))
