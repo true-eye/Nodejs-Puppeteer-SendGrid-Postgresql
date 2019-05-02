@@ -5,7 +5,7 @@ var manageDBFile = require("./manageDBFile/index.js")
 
 scrap_corporategotem = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Men</h2>`
+    let message = `<h2 style="background: white; color: red; text-align: center;"><a href="corporategotem.com" style="color: blue; cursor:pointer;">corporategotem.com</a>   Men</h2>`
     let ret = await manageDBFile.load_from_file("corporategotem.json").then(prevList => {
         return corporategotem().then((currentList) => {
 
