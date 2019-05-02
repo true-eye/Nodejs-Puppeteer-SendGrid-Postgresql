@@ -115,7 +115,7 @@ corporategotem = async () => {
                 }
             }
 
-            return { products, bLastPage: page_index >= 2 }
+            return { products, bLastPage: false }
         });
 
         console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length);
