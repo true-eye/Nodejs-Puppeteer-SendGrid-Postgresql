@@ -46,8 +46,7 @@ scrap_corporategotem = async (func_name) => {
 
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true) 
-
-            {
+            if (true) {
                 manageDBFile.save_to_file("corporategotem.json", currentList)
                     .then(res => {
                         console.log(res)
@@ -72,7 +71,7 @@ corporategotem = async () => {
 
     const chromeLaunchOptions = {
         // ignoreHTTPSErrors: true,
-        headless: true,
+        headless: false,
         // timeout: 0,
         args: [
             '--disable-setuid-sandbox',
@@ -91,11 +90,11 @@ corporategotem = async () => {
 
     while (1) {
         let category = page_index == 1 ? 'Nike' : 'Jordan'
-        await page.goto(`http://corporategotem.com/products.cfm?Start=17&viewall=1&SortBy=Newest&CatID=sale&Brand=${category}&Size=Show%20All%20Sizes`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`http://corporategotem.com/products.cfm?Start=17&viewall=1&SortBy=Newest&CatID=sale&Brand=${category}&Size=Show%20All%20Sizes`, { timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            const productDetails = document.querySelectorAll('#product-listing-main > .row > a');
+            const productDetails = document.querySelectorAll('#product-listing-main a');
             for (var product of productDetails) {
 
                 const productRef = product.getAttribute('href');
