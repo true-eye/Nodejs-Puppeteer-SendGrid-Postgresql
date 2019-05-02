@@ -5,7 +5,7 @@ var manageDBFile = require("./manageDBFile/index.js")
 
 scrap_kickz = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">kickz.com</h2>`
+    let message = `<h2 style="background: white; color: red; text-align: center;">kickz.com Men</h2>`
     let ret = await manageDBFile.load_from_file("kickz.json").then(prevList => {
         return kickz().then((currentList) => {
 
@@ -87,7 +87,8 @@ kickz = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://www.kickz.com/us/sale/jordan,nike/shoes/c?selectedPage=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+
+        await page.goto(`https://www.kickz.com/us/sale/jordan,nike/Men/shoes/c?selectedPage=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];

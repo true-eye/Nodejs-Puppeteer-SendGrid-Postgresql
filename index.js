@@ -59,28 +59,26 @@ let allWebsites = async () => {
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
     //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
 
-    /*
-        message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
-        message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
-        message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
-    
-        message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
-        message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
-        message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
-        message += await module_jimmyjazz_women.scrap_jimmyjazz_women("module_jimmyjazz_women");   //complete
-        message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
-        message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
-        message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
-        message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
-        message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
-        message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
-        message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
-        message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
-        message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
-        message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
-        message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
-        */
 
+    message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
+    message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
+    message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
+
+    message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
+    message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
+    message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
+    message += await module_jimmyjazz_women.scrap_jimmyjazz_women("module_jimmyjazz_women");   //complete
+    message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
+    message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
+    message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
+    message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
+    message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
+    message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
+    message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
+    message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
+    message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
+    message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
+    message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
 
     message += await module_corporategotem.scrap_corporategotem("scrap_corporategotem"); //completed
 
