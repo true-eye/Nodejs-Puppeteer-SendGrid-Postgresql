@@ -95,7 +95,7 @@ corporategotem = async () => {
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            const productDetails = document.querySelectorAll('#product-listing-main > row > a');
+            const productDetails = document.querySelectorAll('#product-listing-main > .row > a');
             for (var product of productDetails) {
 
                 const productRef = product.getAttribute('href');
