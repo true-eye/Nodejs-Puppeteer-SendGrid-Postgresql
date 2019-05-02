@@ -86,7 +86,7 @@ let allWebsites = async () => {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey("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");
     const msg = {
-        to: 'hamesmodric@outlook.com',
+        to: 'nsalex315@gmail.com',
         from: 'buyer@arkamix.com',
         subject: `Website Product Scrap Daily Report`,
         html: message

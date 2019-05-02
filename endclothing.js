@@ -8,7 +8,7 @@ const poll = require('promise-poller').default;
 
 scrap_endclothing = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Kids</h2>`
+    let message = `<h2 style="background: white; color: red; text-align: center;"><a>endclothing.com</a></h2>`
     let ret = await manageDBFile.load_from_file("endclothing.json").then(prevList => {
         return endclothing().then((currentList) => {
 
