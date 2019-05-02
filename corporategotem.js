@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_kicksusa_men = async (func_name) => {
+scrap_corporategotem = async (func_name) => {
     console.log(func_name, '   Start   ');
     let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Men</h2>`
-    let ret = await manageDBFile.load_from_file("kicksusa_men.json").then(prevList => {
-        return kicksusa_men().then((currentList) => {
+    let ret = await manageDBFile.load_from_file("corporategotem.json").then(prevList => {
+        return corporategotem().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -48,7 +48,7 @@ scrap_kicksusa_men = async (func_name) => {
             //if (prevList.length == 0 || changedFlag == true) 
 
             {
-                manageDBFile.save_to_file("kicksusa_men.json", currentList)
+                manageDBFile.save_to_file("corporategotem.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -57,7 +57,7 @@ scrap_kicksusa_men = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' kicksusa_men return error : ', err)
+            console.log(func_name, ' corporategotem return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -67,7 +67,7 @@ scrap_kicksusa_men = async (func_name) => {
     return ret;
 }
 
-kicksusa_men = async () => {
+corporategotem = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -90,46 +90,39 @@ kicksusa_men = async () => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 
     while (1) {
-        await page.goto(`https://www.kicksusa.com/sale-mens-shoes.html?brands=63_78&limit=72%3Fp%3D1&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        let category = page_index == 1 ? 'Nike' : 'Jordan'
+        await page.goto(`http://corporategotem.com/products.cfm?Start=17&viewall=1&SortBy=Newest&CatID=sale&Brand=${category}&Size=Show%20All%20Sizes`, { waitUntil: 'domcontentloaded', timeout: 0 });
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            const productDetails = document.querySelectorAll('.products-grid > li > .item > .item-info');
+            const productDetails = document.querySelectorAll('#product-listing-main > row > a');
             for (var product of productDetails) {
-                const div_show = product.children[0];
-                const div_price = product.children[1];
-                if (div_show && div_price) {
-                    const productRef = div_show.firstElementChild.getAttribute('href');
-                    let productTitle = div_show.firstElementChild.getAttribute('title');
-                    productTitle = productTitle.split('"').join('');
-                    productTitle = productTitle.replace(/'/g, '')
 
-                    const div_special_price = div_price.getElementsByClassName('special-price')[0];
-                    const div_regular_price = div_price.getElementsByClassName('regular-price')[0];
-                    if (div_special_price) {
-                        const productPrice = div_special_price.lastElementChild.innerText
+                const productRef = product.getAttribute('href');
+                let productTitle = product.getAttribute('title');
+                productTitle = productTitle.split('"').join('');
+                productTitle = productTitle.replace(/'/g, '')
+
+                const div_description = product.children[1];
+                if (div_description) {
+                    const div_price = div_description.lastElementChild
+                    if (div_price) {
+                        let productPrice = div_price.innerText;
+                        productPrice = productPrice.split(' ')[0];
+
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
-                    } else {
-                        if (div_regular_price) {
-                            const productPrice = div_regular_price.firstElementChild.innerText
-                            products.push({ ref: productRef, title: productTitle, price: productPrice });
-                        } else {
-                            const productPrice = "SEE CART FOR PRICE"
-                            products.push({ ref: productRef, title: productTitle, price: productPrice });
-                        }
                     }
-
                 }
             }
 
-            return { products, bLastPage: products.length != 36 }
+            return { products, bLastPage: page_index >= 2 }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, ...pageInfo.products.map(p => p.price));
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length);
 
         productList = [...productList, ...pageInfo.products]
 
-        if (pageInfo.bLastPage == true)
+        if (page_index >= 2)
             break;
         page_index++;
     }
@@ -139,5 +132,5 @@ kicksusa_men = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_kicksusa_men = scrap_kicksusa_men;
-exports.kicksusa_men = kicksusa_men;
+exports.scrap_corporategotem = scrap_corporategotem;
+exports.corporategotem = corporategotem;
