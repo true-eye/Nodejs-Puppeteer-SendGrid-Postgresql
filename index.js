@@ -35,6 +35,7 @@ var module_bstn = require("./bstn")
 var module_bdgastore_balance = require("./bdgastore_balance")
 var module_bdgastore_jordan = require("./bdgastore_jordan")
 var module_bdgastore_nike = require("./bdgastore_nike")
+var module_centre214 = require("./centre214")
 
 app = express();
 
@@ -87,11 +88,13 @@ let allWebsites = async () => {
 
         message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
         message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
+
+        message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
+        message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
+        message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
     */
 
-    message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
-    message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
-    message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
+    message += await module_centre214.scrap_centre214("scrap_centre214"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*
