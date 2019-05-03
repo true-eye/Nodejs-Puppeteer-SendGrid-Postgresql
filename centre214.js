@@ -5,7 +5,7 @@ var manageDBFile = require("./manageDBFile/index.js")
 
 scrap_centre214 = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">centre214.com Nike</h2>`
+    let message = `<h2 style="background: white; color: red; text-align: center;">centre214.com</h2>`
     let ret = await manageDBFile.load_from_file("centre214.json").then(prevList => {
         return centre214().then((currentList) => {
 
