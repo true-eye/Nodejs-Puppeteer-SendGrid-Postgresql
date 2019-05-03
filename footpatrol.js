@@ -71,7 +71,7 @@ footpatrol = async () => {
 
     const chromeLaunchOptions = {
         // ignoreHTTPSErrors: true,
-        headless: false,
+        headless: true,
         // timeout: 0,
         args: [
             '--disable-setuid-sandbox',
