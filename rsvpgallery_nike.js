@@ -89,7 +89,7 @@ rsvpgallery_nike = async () => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 
     while (1) {
-        await page.goto(`https://rsvpgallery_nike.com/collections/nike`);
+        await page.goto(`https://rsvpgallery.com/collections/nike`);
         const pageInfo = await page.evaluate(() => {
             let products = [];
             const productDetails = document.querySelectorAll('.product > .product-details');
