@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_rsvpgallery = async (func_name) => {
+scrap_rsvpgallery_nike = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">rsvpgallery.com Converse</h2>`
-    let ret = await manageDBFile.load_from_file("rsvpgallery.json").then(prevList => {
-        return rsvpgallery().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">rsvpgallery.com Nike</h2>`
+    let ret = await manageDBFile.load_from_file("rsvpgallery_nike.json").then(prevList => {
+        return rsvpgallery_nike().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -47,7 +47,7 @@ scrap_rsvpgallery = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             if (true) {
-                manageDBFile.save_to_file("rsvpgallery.json", currentList)
+                manageDBFile.save_to_file("rsvpgallery_nike.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_rsvpgallery = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' rsvpgallery return error : ', err)
+            console.log(func_name, ' rsvpgallery_nike return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_rsvpgallery = async (func_name) => {
     return ret;
 }
 
-rsvpgallery = async () => {
+rsvpgallery_nike = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -89,7 +89,7 @@ rsvpgallery = async () => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 
     while (1) {
-        await page.goto(`https://rsvpgallery.com/collections/converse`);
+        await page.goto(`https://rsvpgallery_nike.com/collections/nike`);
         const pageInfo = await page.evaluate(() => {
             let products = [];
             const productDetails = document.querySelectorAll('.product > .product-details');
@@ -129,5 +129,5 @@ rsvpgallery = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_rsvpgallery = scrap_rsvpgallery;
-exports.rsvpgallery = rsvpgallery;
+exports.scrap_rsvpgallery_nike = scrap_rsvpgallery_nike;
+exports.rsvpgallery_nike = rsvpgallery_nike;
