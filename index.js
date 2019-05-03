@@ -32,6 +32,7 @@ var module_endclothing = require("./endclothing")
 var module_corporategotem = require("./corporategotem")
 var module_socialstatuspgh = require("./socialstatuspgh")
 var module_bstn = require("./bstn")
+var module_bdgastore_balance = require("./bdgastore_balance")
 
 app = express();
 
@@ -81,10 +82,12 @@ let allWebsites = async () => {
         message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
         message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
         message += await module_corporategotem.scrap_corporategotem("scrap_corporategotem"); //completed
+
+        message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
+        message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
     */
 
-    message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
-    message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
+    message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*
