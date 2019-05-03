@@ -37,6 +37,7 @@ var module_bdgastore_jordan = require("./bdgastore_jordan")
 var module_bdgastore_nike = require("./bdgastore_nike")
 var module_centre214 = require("./centre214")
 var module_footpatrol = require("./footpatrol")
+var module_rsvpgallery = require("./rsvpgallery")
 
 app = express();
 
@@ -96,7 +97,8 @@ let allWebsites = async () => {
         message += await module_centre214.scrap_centre214("scrap_centre214"); //completed
     */
 
-    message += await module_footpatrol.scrap_footpatrol("scrap_footpatrol"); //completed
+    //message += await module_footpatrol.scrap_footpatrol("scrap_footpatrol"); //completed
+    message += await module_rsvpgallery.scrap_rsvpgallery("scrap_rsvpgallery"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*

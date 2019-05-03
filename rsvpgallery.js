@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_footpatrol = async (func_name) => {
+scrap_rsvpgallery = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">footpatrol.com</h2>`
-    let ret = await manageDBFile.load_from_file("footpatrol.json").then(prevList => {
-        return footpatrol().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">rsvpgallery.com</h2>`
+    let ret = await manageDBFile.load_from_file("rsvpgallery.json").then(prevList => {
+        return rsvpgallery().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -46,8 +46,8 @@ scrap_footpatrol = async (func_name) => {
 
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
-            if (false) {
-                manageDBFile.save_to_file("footpatrol.json", currentList)
+            if (true) {
+                manageDBFile.save_to_file("rsvpgallery.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_footpatrol = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' footpatrol return error : ', err)
+            console.log(func_name, ' rsvpgallery return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_footpatrol = async (func_name) => {
     return ret;
 }
 
-footpatrol = async () => {
+rsvpgallery = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -89,39 +89,31 @@ footpatrol = async () => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 
     while (1) {
-        await page.goto(`https://www.footpatrol.com/footwear/mens-footwear/brand/nike,jordan,new-balance/sale/?max=204`);
+        await page.goto(`https://rsvpgallery.com/collections/converse`);
         console.log(await page.content())
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            let btnPage = document.querySelectorAll('.pageLinks');
-            let bLast = true;
-            if (btnPage && btnPage[0]) {
-                let btnNext = btnPage[0].lastElementChild
-                if (btnNext && !btnNext.classList.contains('disabled')) {
-                    bLast = false;
-                }
-            }
-            const productDetails = document.querySelectorAll('.productListItem  > .itemContainer > .itemInformation');
+            const productDetails = document.querySelectorAll('.product > .product-details');
             for (var product of productDetails) {
                 const div_name = product.children[0];
                 const div_price = product.children[1];
 
                 if (div_name && div_price) {
-                    const productRef = "https://www.footpatrol.com" + div_name.firstElementChild.getAttribute('href');
-                    let productTitle = div_name.innerText;
+                    const productRef = "https://rsvpgallery.com" + div_name.getAttribute('href');
+                    let productTitle = div_name.lastElementChild.innerText;
 
                     productTitle = productTitle.split('"').join('');
                     productTitle = productTitle.replace(/'/g, '')
 
-                    const div_sale_badge = div_price.lastElementChild
-                    if (div_sale_badge && div_sale_badge.lastElementChild && div_sale_badge.lastElementChild.lastElementChild) {
-                        const productPrice = div_sale_badge.lastElementChild.lastElementChild.innerText
+                    const div_sale = div_price.firstElementChild
+                    if (div_sale) {
+                        const productPrice = div_sale.innerText
                         products.push({ ref: productRef, title: productTitle, price: productPrice });
                     }
                 }
             }
 
-            return { products, bLastPage: bLast }
+            return { products, bLastPage: true }
         });
 
         console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length);
@@ -138,5 +130,5 @@ footpatrol = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_footpatrol = scrap_footpatrol;
-exports.footpatrol = footpatrol;
+exports.scrap_rsvpgallery = scrap_rsvpgallery;
+exports.rsvpgallery = rsvpgallery;
