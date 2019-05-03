@@ -67,40 +67,41 @@ let allWebsites = async () => {
 
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
     //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
-    /*
-        message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
-        message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
-        message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
-    
-        message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
-        message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
-        message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
-        message += await module_jimmyjazz_women.scrap_jimmyjazz_women("module_jimmyjazz_women");   //complete
-        message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
-        message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
-        message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
-        message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
-        message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
-        message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
-        message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
-        message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
-        message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
-        message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
-        message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
-        message += await module_corporategotem.scrap_corporategotem("scrap_corporategotem"); //completed
 
-        message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
-        message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
+    message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
+    message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
+    message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
 
-        message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
-        message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
-        message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
-        message += await module_centre214.scrap_centre214("scrap_centre214"); //completed
-    */
+    message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
+    message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
+    message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
+    message += await module_jimmyjazz_women.scrap_jimmyjazz_women("module_jimmyjazz_women");   //complete
+    message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
+    message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
+    message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
+    message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
+    message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
+    message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
+    message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
+    message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
+    message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
+    message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
+    message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
+    message += await module_corporategotem.scrap_corporategotem("scrap_corporategotem"); //completed
 
-    //message += await module_footpatrol.scrap_footpatrol("scrap_footpatrol"); //completed
+    message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
+    message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
+
+    message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
+    message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
+    message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
+    message += await module_centre214.scrap_centre214("scrap_centre214"); //completed
+
     message += await module_rsvpgallery.scrap_rsvpgallery("scrap_rsvpgallery"); //completed
     message += await module_rsvpgallery_nike.scrap_rsvpgallery_nike("scrap_rsvpgallery_nike"); //completed
+
+
+    message += await module_footpatrol.scrap_footpatrol("scrap_footpatrol");
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*
@@ -114,7 +115,7 @@ let allWebsites = async () => {
         };
         sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));
     */
-    /*const sgMail1 = require('@sendgrid/mail');
+    const sgMail1 = require('@sendgrid/mail');
     sgMail1.setApiKey("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");
     const msg1 = {
         to: 'buyer@arkamix.com',
@@ -122,7 +123,7 @@ let allWebsites = async () => {
         subject: `Website Product Scrap Daily Report`,
         html: message
     };
-    sgMail1.send(msg1).then(res => console.log('Successfully sent to me!')).catch(err => console.log('Failed sent to me!'));*/
+    sgMail1.send(msg1).then(res => console.log('Successfully sent to me!')).catch(err => console.log('Failed sent to me!'));
 
 }
 
