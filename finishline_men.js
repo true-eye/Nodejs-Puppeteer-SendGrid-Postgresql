@@ -24,7 +24,7 @@ scrap_finishline_men = async (func_name) => {
 
                         message += `<br/>https://www.finishline.com/store/sale/men/shoes/nike/jordan/adidas<br/>
                                                         ------New Product Launched------
-                                    ------Ref:  <a>${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}`
+                                    ------Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}`
 
                         changedFlag = true;
                     } else {
@@ -34,7 +34,7 @@ scrap_finishline_men = async (func_name) => {
 
                             message += `<br/>https://www.finishline.com/store/sale/men/shoes/nike/jordan/adidas<br/>
                                                         ------Product Price Changed------
-                                    ------Ref:  <a>${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})`
+                                    ------Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})`
 
                             changedFlag = true;
                         }

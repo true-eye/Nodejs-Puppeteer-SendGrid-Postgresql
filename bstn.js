@@ -2,12 +2,13 @@
 const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
+const recaptcha = require('./recaptcha')
 
-scrap_kicksusa_kids = async (func_name) => {
+scrap_bstn = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;"><a>kicksusa.com</a>   Kids</h2>`
-    let ret = await manageDBFile.load_from_file("kicksusa_kids.json").then(prevList => {
-        return kicksusa_kids().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">bstn.com</h2>`
+    let ret = await manageDBFile.load_from_file("bstn.json").then(prevList => {
+        return bstn().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -45,11 +46,9 @@ scrap_kicksusa_kids = async (func_name) => {
             }
 
             // save changed product list
-            //if (prevList.length == 0 || changedFlag == true) 
-
-
-            {
-                manageDBFile.save_to_file("kicksusa_kids.json", currentList)
+            //if (prevList.length == 0 || changedFlag == true)
+            if (true) {
+                manageDBFile.save_to_file("bstn.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -58,7 +57,7 @@ scrap_kicksusa_kids = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' kicksusa_kids return error : ', err)
+            console.log(func_name, ' bstn return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -68,7 +67,7 @@ scrap_kicksusa_kids = async (func_name) => {
     return ret;
 }
 
-kicksusa_kids = async () => {
+bstn = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -91,42 +90,73 @@ kicksusa_kids = async () => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
 
     while (1) {
-        await page.goto(`https://www.kicksusa.com/sale-kids-grade-school.html?brands=78_63&footware_size=340_294_292_298_296_302_300_305&limit=72%3Fp%3D1&p=${page_index}`, { waitUntil: 'domcontentloaded', timeout: 0 });
+        await page.goto(`https://www.bstn.com/en/sale/filter/__brand_jordan.nike.nike-sb/page/${page_index}/sort/date_new`, { timeout: 0 });
+
+
+        const isCaptcha = await page.evaluate(() => {
+            let gCaptcha = document.getElementById("challenge-form");
+            //let gCaptcha = document.getElementsByTagName("body");
+            return (gCaptcha != null && gCaptcha.innerHTML != '')
+        });
+
+        console.log(isCaptcha)
+
+        if (isCaptcha) {
+            console.log('--Entering to Captcha Mode--')
+            //const apiKey = "1a21be9ca8506169bd5b2a310457a8d0"
+            const apiKey = "962808d9cfd77925df940b91ffa12ca5"
+
+            const siteDetails = {
+                sitekey: '6LfBixYUAAAAABhdHynFUIMA_sa4s-XsJvnjtgB0',
+                pageurl: 'https://www.bstn.com/en/sale/filter/__brand_jordan.nike.nike-sb/page/1/sort/date_new'
+            }
+
+            const requestId = await recaptcha.initiateCaptchaRequest(apiKey, siteDetails);
+
+            const response = await recaptcha.pollForRequestResults(apiKey, requestId);
+
+            await page.evaluate(`document.getElementById("g-recaptcha-response").innerHTML="${response}";`);
+
+            await Promise.all([page.evaluate('document.getElementById("challenge-form").submit();'), page.waitForNavigation()]);
+        }
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
-            const productDetails = document.querySelectorAll('.products-grid > li > .item > .item-info');
+            let btnPage = document.querySelectorAll('.products_navigation > .right .next');
+            let bLast = true;
+            if (btnPage) {
+                let btnNext = btnPage[0]
+                if (btnNext && !btnNext.classList.contains('unavailable')) {
+                    bLast = false;
+                }
+            }
+            const productDetails = document.querySelectorAll('.productlist > .item > .itemWrapper > .pText');
             for (var product of productDetails) {
-                const div_show = product.children[0];
+                const div_name = product.children[0];
                 const div_price = product.children[1];
-                if (div_show && div_price) {
-                    const productRef = div_show.firstElementChild.getAttribute('href');
-                    let productTitle = div_show.firstElementChild.getAttribute('title');
+
+                if (div_name && div_price) {
+                    const productRef = "https://www.bstn.com" + div_name.getAttribute('href');
+                    let productTitle = div_name.getAttribute('title');
+
                     productTitle = productTitle.split('"').join('');
                     productTitle = productTitle.replace(/'/g, '')
 
-                    const div_special_price = div_price.getElementsByClassName('special-price')[0];
-                    const div_regular_price = div_price.getElementsByClassName('regular-price')[0];
-                    if (div_special_price) {
-                        const productPrice = div_special_price.lastElementChild.innerText
-                        products.push({ ref: productRef, title: productTitle, price: productPrice });
-                    } else {
-                        if (div_regular_price) {
-                            const productPrice = div_regular_price.firstElementChild.innerText
-                            products.push({ ref: productRef, title: productTitle, price: productPrice });
-                        } else {
-                            const productPrice = "SEE CART FOR PRICE"
+                    if (productTitle.toUpperCase().includes('NIKE') || productTitle.toUpperCase().includes('JORDAN')) {
+                        const div_newprice = div_price.children[1];
+                        if (div_newprice) {
+                            const productPrice = div_newprice.innerText;
                             products.push({ ref: productRef, title: productTitle, price: productPrice });
                         }
-                    }
 
+                    }
                 }
             }
 
-            return { products, bLastPage: products.length != 36 }
+            return { products, bLastPage: bLast }
         });
 
-        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, ...pageInfo.products.map(p => p.price));
+        console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length);
 
         productList = [...productList, ...pageInfo.products]
 
@@ -140,5 +170,6 @@ kicksusa_kids = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_kicksusa_kids = scrap_kicksusa_kids;
-exports.kicksusa_kids = kicksusa_kids;
+exports.scrap_bstn = scrap_bstn;
+exports.bstn = bstn;
+

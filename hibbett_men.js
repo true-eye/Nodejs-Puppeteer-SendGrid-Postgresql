@@ -27,7 +27,7 @@ scrap_hibbett_men = async (func_name) => {
                     // curItem is a new item
                     console.log(`******* ${func_name} new item launched ******`, curItem)
 
-                    message += `<h4>New Product Launched Ref: <a>${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
+                    message += `<h4>New Product Launched Ref: <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
 
                     changedFlag = true;
                 } else {
@@ -35,7 +35,7 @@ scrap_hibbett_men = async (func_name) => {
                     if (curItem.price != prevProduct.price) {
                         console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
-                        message += `<h4>Product Price Changed Ref:  <a>${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
+                        message += `<h4>Product Price Changed Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
 
                         changedFlag = true;
                     }
