@@ -33,6 +33,8 @@ var module_corporategotem = require("./corporategotem")
 var module_socialstatuspgh = require("./socialstatuspgh")
 var module_bstn = require("./bstn")
 var module_bdgastore_balance = require("./bdgastore_balance")
+var module_bdgastore_jordan = require("./bdgastore_jordan")
+var module_bdgastore_nike = require("./bdgastore_nike")
 
 app = express();
 
@@ -88,6 +90,8 @@ let allWebsites = async () => {
     */
 
     message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
+    message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
+    message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
     /*

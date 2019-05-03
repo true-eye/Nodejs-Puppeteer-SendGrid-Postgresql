@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 var manageDBFile = require("./manageDBFile/index.js")
 
 
-scrap_bdgastore_balance = async (func_name) => {
+scrap_bdgastore_jordan = async (func_name) => {
     console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">bdgastore_balance.com New_Balance</h2>`
-    let ret = await manageDBFile.load_from_file("bdgastore_balance.json").then(prevList => {
-        return bdgastore_balance().then((currentList) => {
+    let message = `<h2 style="background: white; color: red; text-align: center;">bdgastore_jordan.com Jordan</h2>`
+    let ret = await manageDBFile.load_from_file("bdgastore_jordan.json").then(prevList => {
+        return bdgastore_jordan().then((currentList) => {
 
             console.log(func_name, ' getCurrentProductList success : ', currentList.length);
 
@@ -47,7 +47,7 @@ scrap_bdgastore_balance = async (func_name) => {
             // save changed product list
             //if (prevList.length == 0 || changedFlag == true)
             if (true) {
-                manageDBFile.save_to_file("bdgastore_balance.json", currentList)
+                manageDBFile.save_to_file("bdgastore_jordan.json", currentList)
                     .then(res => {
                         console.log(res)
                     }).catch(err => {
@@ -56,7 +56,7 @@ scrap_bdgastore_balance = async (func_name) => {
             }
             return message
         }).catch(err => {
-            console.log(func_name, ' bdgastore_balance return error : ', err)
+            console.log(func_name, ' bdgastore_jordan return error : ', err)
             return null;
         });
     }).catch(err => {
@@ -66,7 +66,7 @@ scrap_bdgastore_balance = async (func_name) => {
     return ret;
 }
 
-bdgastore_balance = async () => {
+bdgastore_jordan = async () => {
     // Actual Scraping goes Here...
 
     const chromeLaunchOptions = {
@@ -87,7 +87,7 @@ bdgastore_balance = async () => {
     let page_index = 1;
 
     while (1) {
-        await page.goto(`https://bdgastore.com/collections/sale#?Collections=Sale&Producttype=Shoes&Vendor=New+Balance&res_per_page=60&search_return=all&page=${page_index}`);
+        await page.goto(`https://bdgastore.com/collections/sale#?Collections=Sale&Producttype=Shoes&Vendor=Air+Jordan&res_per_page=60&search_return=all&page=${page_index}`);
 
         const pageInfo = await page.evaluate(() => {
             let products = [];
@@ -128,5 +128,5 @@ bdgastore_balance = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_bdgastore_balance = scrap_bdgastore_balance;
-exports.bdgastore_balance = bdgastore_balance;
+exports.scrap_bdgastore_jordan = scrap_bdgastore_jordan;
+exports.bdgastore_jordan = bdgastore_jordan;
