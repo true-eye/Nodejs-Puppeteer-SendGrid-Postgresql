@@ -4,6 +4,7 @@ let nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
 var path = require("path");
 
+var manageDBFile = require("./manageDBFile/index.js")
 var module_onenessboutique = require("./onenessboutique.js")
 var module_finishline_men = require("./finishline_men.js")
 var module_citygear = require("./citygear.js")
@@ -62,58 +63,169 @@ var transporter2 = nodemailer.createTransport(smtpTransport({
     }
 }));*/
 
+scrap = async (sitename, detail_func) => {
+    let func_name = 'scrap_' + sitename;
+    console.log(func_name, '   Start   ');
+    let message = `<tr><td colspan="5" class="sitename">${sitename}</td></tr>`
+    let ret = await manageDBFile.load_from_file(`${sitename}.json`).then(prevList => {
+        return detail_func().then((currentList) => {
+
+            console.log(func_name, ' getCurrentProductList success : ', currentList.length);
+
+            var changedFlag = false;
+
+            if (prevList.length > 0) {
+                for (let i in currentList) {
+                    const curItem = currentList[i];
+                    const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
+
+                    if (productsWithSameTitle.length == 0) {
+                        // curItem is a new item
+                        console.log(`******* ${func_name} new item launched ******`, curItem)
+
+                        message += `<tr>
+                                        <td>1</td>
+                                        <td>New Product Launched</td>
+                                        <td><a href="${curItem.ref}">${curItem.ref}</a></td>
+                                        <td>${curItem.title}</td>
+                                        <td>${curItem.price}</td>
+                                    </tr>`
+
+                        changedFlag = true;
+                    } else {
+                        const prevProduct = productsWithSameTitle[0];
+                        if (curItem.price != prevProduct.price) {
+                            console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
+
+                            message += `<tr>
+                                        <td>1</td>
+                                        <td>Price Changed</td>
+                                        <td><a href="${curItem.ref}">${curItem.ref}</a></td>
+                                        <td>${curItem.title}</td>
+                                        <td>${curItem.price}</td>
+                                    </tr>`
+
+                            changedFlag = true;
+                        }
+                    }
+                }
+            }
+
+            if (changedFlag == false) {
+                console.log(func_name, ' no changes')
+                message += `<tr><td colspan="5">No Changes</td>`
+            }
+
+            // save changed product list
+            //if (prevList.length == 0 || changedFlag == true) 
+            if (true) {
+                manageDBFile.save_to_file(`${sitename}.json`, currentList)
+                    .then(res => {
+                        console.log(res)
+                    }).catch(err => {
+                        console.log(func_name, " saveToFile return error : ", err)
+                    })
+            }
+            return message
+        }).catch(err => {
+            console.log(func_name, ` ${sitename} return error : `, err)
+            return null;
+        });
+    }).catch(err => {
+        console.log(func_name, ' loadFromFile return error : ', err)
+        return null;
+    })
+    return ret;
+}
+
 let allWebsites = async () => {
-    let message = ``;
+    let message = `<html>
+
+    <head>
+        <style>
+            table {
+                width: 100%;
+                font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+            }
+    
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center
+            }
+    
+            .sitename {
+                background-color: #4CAF50;
+                color: white;
+            }
+    
+            th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                background-color: #FCAF50;
+                color: #000;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Type</th>
+                    <th>URL</th>
+                    <th>Titie</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>`;
 
     //message += await module_finishline_men.scrap_finishline_men("scrap_finishline_men");
-    //message += await module_saintalfred.scrap_saintalfred("scrap_saintalfred"); //complete
-
-    message += await module_kicksusa_men.scrap_kicksusa_men("scrap_kicksusa_men"); //completed
-    message += await module_kicksusa_women.scrap_kicksusa_women("scrap_kicksusa_women") //completed
-    message += await module_kicksusa_kids.scrap_kicksusa_kids("scrap_kicksusa_kids") //completed
-
-    message += await module_onenessboutique.scrap_onenessboutique("scrap_onenessboutique"); //complete
-    message += await module_citygear.scrap_citygear("scrap_citygear");    //complete
-    message += await module_jimmyjazz_men.scrap_jimmyjazz_men("scrap_jimmyjazz_men");   //complete
-    message += await module_jimmyjazz_women.scrap_jimmyjazz_women("module_jimmyjazz_women");   //complete
-    message += await module_jimmyjazz_grade.scrap_jimmyjazz_grade("scrap_jimmyjazz_grade");   //complete
-    message += await module_kickz.scrap_kickz("scrap_kickz"); //completed
-    message += await module_shelta.scrap_shelta("scrap_shelta"); //complete
-    message += await module_sneakerpolitics.scrap_sneakerpolitics("scrap_sneakerpolitics"); //completed
-    message += await module_ycmc.scrap_ycmc("scrap_ycmc"); //completed
-    message += await module_asphaltgold.scrap_asphaltgold("scrap_asphaltgold"); //completed
-    message += await module_notreshop.scrap_notreshop("scrap_notreshop"); //completed
-    message += await module_hanonshop.scrap_hanonshop("scrap_hanonshop"); //completed
-    message += await module_sotostore.scrap_sotostore("scrap_sotostore"); //completed
-    message += await module_lapstoneandhammer.scrap_lapstoneandhammer("scrap_lapstoneandhammer"); //completed
-    message += await module_endclothing.scrap_endclothing("scrap_endclothing"); //completed
-    message += await module_corporategotem.scrap_corporategotem("scrap_corporategotem"); //completed
-
-    message += await module_socialstatuspgh.scrap_socialstatuspgh("scrap_socialstatuspgh"); //completed
-    message += await module_bstn.scrap_bstn("scrap_bstn"); //completed
-
-    message += await module_bdgastore_balance.scrap_bdgastore_balance("scrap_bdgastore_balance"); //completed
-    message += await module_bdgastore_jordan.scrap_bdgastore_jordan("scrap_bdgastore_jordan"); //completed
-    message += await module_bdgastore_nike.scrap_bdgastore_nike("scrap_bdgastore_nike"); //completed
-    message += await module_centre214.scrap_centre214("scrap_centre214"); //completed
-
-    message += await module_rsvpgallery.scrap_rsvpgallery("scrap_rsvpgallery"); //completed
-    message += await module_rsvpgallery_nike.scrap_rsvpgallery_nike("scrap_rsvpgallery_nike"); //completed
-
-
-    message += await module_footpatrol.scrap_footpatrol("scrap_footpatrol");
+    //message += await scrap_kicksusa_men.scrap_saintalfred("scrap_saintalfred"); //complete
+    message += await scrap("kicksusa_men", module_kicksusa_men.default)
+    message += await scrap("kicksusa_women", module_kicksusa_women.default)
+    message += await scrap("kicksusa_kids", module_kicksusa_kids.default)
+    message += await scrap("onenessboutique", module_onenessboutique.default)
+    message += await scrap("citygear", module_citygear.default)
+    message += await scrap("jimmyjazz_men", module_jimmyjazz_men.default)
+    message += await scrap("jimmyjazz_women", module_jimmyjazz_women.default)
+    message += await scrap("jimmyjazz_grade", module_jimmyjazz_grade.default)
+    message += await scrap("kickz", module_kickz.default)
+    message += await scrap("shelta", module_shelta.default)
+    message += await scrap("sneakerpolitics", module_sneakerpolitics.default)
+    message += await scrap("ycmc", module_ycmc.default)
+    message += await scrap("asphaltgold", module_asphaltgold.default)
+    message += await scrap("notreshop", module_notreshop.default)
+    message += await scrap("hanonshop", module_hanonshop.default)
+    message += await scrap("sotostore", module_sotostore.default)
+    message += await scrap("lapstoneandhammer", module_lapstoneandhammer.default)
+    message += await scrap("endclothing", module_endclothing.default)
+    message += await scrap("corporategotem", module_corporategotem.default)
+    message += await scrap("socialstatuspgh", module_socialstatuspgh.default)
+    message += await scrap("bstn", module_bstn.default)
+    message += await scrap("bdgastore_balance", module_bdgastore_balance.default)
+    message += await scrap("bdgastore_jordan", module_bdgastore_jordan.default)
+    message += await scrap("bdgastore_nike", module_bdgastore_nike.default)
+    message += await scrap("centre214", module_centre214.default)
+    message += await scrap("rsvpgallery", module_rsvpgallery.default)
+    message += await scrap("rsvpgallery_nike", module_rsvpgallery_nike.default)
+    message += await scrap("footpatrol", module_footpatrol.default)
 
     //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
+    message += `</tbody></table></body></html>`;
     /*
         const sgMail = require('@sendgrid/mail');
         sgMail.setApiKey("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");
         const msg = {
-            to: 'nsalex315@gmail.com',
+            to: 'joonas.webk@gmail.com',
             from: 'buyer@arkamix.com',
             subject: `Website Product Scrap Daily Report`,
             html: message
         };
         sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));
+    
     */
     const sgMail1 = require('@sendgrid/mail');
     sgMail1.setApiKey("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");

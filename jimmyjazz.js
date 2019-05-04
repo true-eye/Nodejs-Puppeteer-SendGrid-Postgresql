@@ -1,74 +1,9 @@
 
 const puppeteer = require('puppeteer');
-var manageDBFile = require("./manageDBFile/index.js")
 var randomUseragent = require('random-useragent');
 //var request = require('request');
 const request = require('request-promise-native');
 const poll = require('promise-poller').default;
-
-scrap_jimmyjazz = async (func_name) => {
-    console.log(func_name, '   Start   ');
-    let siteURL = "http://www.jimmyjazz.com/clearance?category=footwear"
-    let ret = await manageDBFile.load_from_file("jimmyjazz.json").then(prevList => {
-        return jimmyjazz().then((currentList) => {
-
-            console.log(func_name, ' getCurrentProductList success : ', currentList.length);
-
-            var changedFlag = false;
-            let message = `<h2 style="background: white; color: red; text-align: center;">www.jimmyjazz.com</h2>`
-
-            if (prevList.length > 0) {
-                for (let i in currentList) {
-                    const curItem = currentList[i];
-                    const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
-
-                    if (productsWithSameTitle.length == 0) {
-                        // curItem is a new item
-                        console.log(`******* ${func_name} new item launched ******`, curItem)
-
-                        message += `<h4>New Product Launched Ref: <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
-
-                        changedFlag = true;
-                    } else {
-                        const prevProduct = productsWithSameTitle[0];
-                        if (curItem.price != prevProduct.price) {
-                            console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
-
-                            message += `<h4>Product Price Changed Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
-
-                            changedFlag = true;
-                        }
-                    }
-                }
-            }
-
-            if (changedFlag == false) {
-                console.log(func_name, ' no changes')
-                message += `<h4 style="color: red;">No Changes</h4> `
-            }
-
-            // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
-            {
-                manageDBFile.save_to_file("jimmyjazz.json", currentList)
-                    .then(res => {
-                        console.log(res)
-                    }).catch(err => {
-                        console.log(func_name, " saveToFile return error : ", err)
-                    })
-            }
-            return message
-        }).catch(err => {
-            console.log(func_name, ' jimmyjazz return error : ', err)
-            return null;
-        });
-    }).catch(err => {
-        console.log(func_name, ' loadFromFile return error : ', err)
-        return null;
-    })
-    return ret;
-}
-
 
 jimmyjazz = async () => {
     // Actual Scraping goes Here...
@@ -189,8 +124,7 @@ jimmyjazz = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_jimmyjazz = scrap_jimmyjazz;
-exports.jimmyjazz = jimmyjazz;
+exports.default = jimmyjazz;
 
 const siteDetails = {
     sitekey: '6LfBixYUAAAAABhdHynFUIMA_sa4s-XsJvnjtgB0',

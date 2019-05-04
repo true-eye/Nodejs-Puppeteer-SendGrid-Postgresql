@@ -1,73 +1,5 @@
 
 const puppeteer = require('puppeteer');
-var manageDBFile = require("./manageDBFile/index.js")
-
-
-scrap_finishline_men = async (func_name) => {
-    console.log(func_name, '   Start   ');
-    let ret = await manageDBFile.load_from_file("finishline_men.json").then(prevList => {
-        return finishline_men().then((currentList) => {
-
-            console.log(func_name, ' getCurrentProductList success : ', currentList.length);
-
-            var changedFlag = false;
-            let message = ""
-
-            if (prevList.length > 0) {
-                for (let i in currentList) {
-                    const curItem = currentList[i];
-                    const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
-
-                    if (productsWithSameTitle.length == 0) {
-                        // curItem is a new item
-                        console.log(`******* ${func_name} new item launched ******`, curItem)
-
-                        message += `<br/>https://www.finishline.com/store/sale/men/shoes/nike/jordan/adidas<br/>
-                                                        ------New Product Launched------
-                                    ------Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}`
-
-                        changedFlag = true;
-                    } else {
-                        const prevProduct = productsWithSameTitle[0];
-                        if (curItem.price != prevProduct.price) {
-                            console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
-
-                            message += `<br/>https://www.finishline.com/store/sale/men/shoes/nike/jordan/adidas<br/>
-                                                        ------Product Price Changed------
-                                    ------Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})`
-
-                            changedFlag = true;
-                        }
-                    }
-                }
-            }
-
-            if (changedFlag == false) {
-                console.log(func_name, ' no changes')
-                message += `<br/>https://www.finishline.com/store/sale/men/shoes/nike/jordan/adidas  :   No Changes<br/> `
-            }
-
-            // save changed product list
-            //if (prevList.length == 0 || changedFlag == true) 
-            {
-                manageDBFile.save_to_file("finishline_men.json", currentList)
-                    .then(res => {
-                        console.log(res)
-                    }).catch(err => {
-                        console.log(func_name, " saveToFile return error : ", err)
-                    })
-            }
-            return message
-        }).catch(err => {
-            console.log(func_name, ' finishline_men return error : ', err)
-            return null;
-        });
-    }).catch(err => {
-        console.log(func_name, ' loadFromFile return error : ', err)
-        return null;
-    })
-    return ret;
-}
 
 finishline_men = async () => {
     // Actual Scraping goes Here...
@@ -137,5 +69,4 @@ finishline_men = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_finishline_men = scrap_finishline_men;
-exports.finishline_men = finishline_men;
+exports.default = finishline_men;

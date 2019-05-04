@@ -1,71 +1,5 @@
 
 const puppeteer = require('puppeteer');
-var manageDBFile = require("./manageDBFile/index.js")
-
-
-scrap_onenessboutique = async (func_name) => {
-    console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">Onenessboutique.com</h2>`
-    let ret = await manageDBFile.load_from_file("onenessboutique.json").then(prevList => {
-        return onenessboutique().then((currentList) => {
-
-            console.log(func_name, ' getCurrentProductList success : ', currentList.length);
-
-            var changedFlag = false;
-
-
-            if (prevList.length > 0) {
-                for (let i in currentList) {
-                    const curItem = currentList[i];
-                    const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
-
-                    if (productsWithSameTitle.length == 0) {
-                        // curItem is a new item
-                        // console.log(`******* ${func_name} new item launched ******`, curItem)
-
-                        message += `<h4>New Product Launched Ref: <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
-
-                        changedFlag = true;
-                    } else {
-                        const prevProduct = productsWithSameTitle[0];
-                        if (curItem.price != prevProduct.price) {
-                            // console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
-
-                            message += `<h4>Product Price Changed Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
-
-                            changedFlag = true;
-                        }
-                    }
-                }
-            }
-
-            if (changedFlag == false) {
-                console.log(func_name, ' no changes')
-                message += `<h4 style="color: red;">No Changes</h4> `
-            }
-
-            // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
-            {
-                manageDBFile.save_to_file("onenessboutique.json", currentList)
-                    .then(res => {
-                        console.log(res)
-                    }).catch(err => {
-                        console.log(func_name, " saveToFile return error : ", err)
-                    })
-                console.log('Welcome')
-            }
-            return message
-        }).catch(err => {
-            console.log(func_name, ' onenessboutique return error : ', err)
-            return null;
-        });
-    }).catch(err => {
-        console.log(func_name, ' loadFromFile return error : ', err)
-        return null;
-    })
-    return ret;
-}
 
 onenessboutique = async () => {
     // Actual Scraping goes Here...
@@ -127,5 +61,4 @@ onenessboutique = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_onenessboutique = scrap_onenessboutique;
-exports.onenessboutique = onenessboutique;
+exports.default = onenessboutique;

@@ -1,70 +1,5 @@
 
 const puppeteer = require('puppeteer');
-var manageDBFile = require("./manageDBFile/index.js")
-
-
-scrap_bdgastore_nike = async (func_name) => {
-    console.log(func_name, '   Start   ');
-    let message = `<h2 style="background: white; color: red; text-align: center;">bdgastore_nike.com Nike</h2>`
-    let ret = await manageDBFile.load_from_file("bdgastore_nike.json").then(prevList => {
-        return bdgastore_nike().then((currentList) => {
-
-            console.log(func_name, ' getCurrentProductList success : ', currentList.length);
-
-            var changedFlag = false;
-
-
-            if (prevList.length > 0) {
-                for (let i in currentList) {
-                    const curItem = currentList[i];
-                    const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
-
-                    if (productsWithSameTitle.length == 0) {
-                        // curItem is a new item
-                        console.log(`******* ${func_name} new item launched ******`, curItem)
-
-                        message += `<h4>New Product Launched Ref: <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}</h4><br/>`
-
-                        changedFlag = true;
-                    } else {
-                        const prevProduct = productsWithSameTitle[0];
-                        if (curItem.price != prevProduct.price) {
-                            console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
-
-                            message += `<h4>Product Price Changed Ref:  <a href="${curItem.ref}">${curItem.ref}</a>, Title: ${curItem.title}, Price: ${curItem.price}(origin: ${prevProduct.price})</h4><br/>`
-
-                            changedFlag = true;
-                        }
-                    }
-                }
-            }
-
-            if (changedFlag == false) {
-                console.log(func_name, ' no changes')
-                message += `<h4 style="color: red;">No Changes</h4> `
-            }
-
-            // save changed product list
-            //if (prevList.length == 0 || changedFlag == true)
-            if (true) {
-                manageDBFile.save_to_file("bdgastore_nike.json", currentList)
-                    .then(res => {
-                        console.log(res)
-                    }).catch(err => {
-                        console.log(func_name, " saveToFile return error : ", err)
-                    })
-            }
-            return message
-        }).catch(err => {
-            console.log(func_name, ' bdgastore_nike return error : ', err)
-            return null;
-        });
-    }).catch(err => {
-        console.log(func_name, ' loadFromFile return error : ', err)
-        return null;
-    })
-    return ret;
-}
 
 bdgastore_nike = async () => {
     // Actual Scraping goes Here...
@@ -128,5 +63,4 @@ bdgastore_nike = async () => {
     browser.close();
     return productList;
 };
-exports.scrap_bdgastore_nike = scrap_bdgastore_nike;
-exports.bdgastore_nike = bdgastore_nike;
+exports.default = bdgastore_nike;
