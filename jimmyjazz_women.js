@@ -68,7 +68,7 @@ jimmyjazz_women = async () => {
                         var div_productgrid_title_a = div_productgrid_info.lastElementChild.firstElementChild;
 
                         if (div_productgrid_brand_a && div_productgrid_title_a) {
-                            productRef = "www.jimmyjazz_women.com" + div_productgrid_brand_a.getAttribute('href');
+                            productRef = "https://www.jimmyjazz_women.com" + div_productgrid_brand_a.getAttribute('href');
 
                             if (div_productgrid_title_a.lastElementChild) {
                                 var div_product_size = div_productgrid_title_a.lastElementChild

@@ -75,6 +75,7 @@ scrap = async (sitename, detail_func) => {
             var changedFlag = false;
 
             if (prevList.length > 0) {
+                let count = 1;
                 for (let i in currentList) {
                     const curItem = currentList[i];
                     const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
@@ -84,7 +85,7 @@ scrap = async (sitename, detail_func) => {
                         console.log(`******* ${func_name} new item launched ******`, curItem)
 
                         message += `<tr>
-                                        <td>1</td>
+                                        <td>${count}</td>
                                         <td>New Product Launched</td>
                                         <td><a href="${curItem.ref}">${curItem.ref}</a></td>
                                         <td>${curItem.title}</td>
@@ -92,13 +93,14 @@ scrap = async (sitename, detail_func) => {
                                     </tr>`
 
                         changedFlag = true;
+                        count++;
                     } else {
                         const prevProduct = productsWithSameTitle[0];
                         if (curItem.price != prevProduct.price) {
                             console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
                             message += `<tr>
-                                        <td>1</td>
+                                        <td>${count}</td>
                                         <td>Price Changed</td>
                                         <td><a href="${curItem.ref}">${curItem.ref}</a></td>
                                         <td>${curItem.title}</td>
@@ -106,6 +108,7 @@ scrap = async (sitename, detail_func) => {
                                     </tr>`
 
                             changedFlag = true;
+                            count++;
                         }
                     }
                 }
