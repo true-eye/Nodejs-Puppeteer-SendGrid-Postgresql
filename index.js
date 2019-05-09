@@ -226,7 +226,7 @@ let allWebsites = async () => {
             <tbody>`
 
   //message += await scrap('finishline_men', module_finishline_men.default)
-  /*
+
   message += await scrap('saintalfred', module_saintalfred.default)
   message += await scrap('kicksusa_men', module_kicksusa_men.default)
   message += await scrap('kicksusa_women', module_kicksusa_women.default)
@@ -266,9 +266,9 @@ let allWebsites = async () => {
   message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
   message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
   message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
-*/
-  //message += await scrap('renarts_men', module_renarts_men.default) //complete
-  //message += await scrap('renarts_women', module_renarts_women.default) //complete
+
+  message += await scrap('renarts_men', module_renarts_men.default) //complete
+  message += await scrap('renarts_women', module_renarts_women.default) //complete
   message += await scrap('ubiqlife', module_ubiqlife.default) //complete
 
   //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
