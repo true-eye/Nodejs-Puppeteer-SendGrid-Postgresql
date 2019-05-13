@@ -44,7 +44,7 @@ bstn = async () => {
       const siteDetails = {
         sitekey: '6LfBixYUAAAAABhdHynFUIMA_sa4s-XsJvnjtgB0',
         pageurl:
-          'https://www.bstn.com/en/sale/filter/__brand_jordan.nike.nike-sb/page/1/sort/date_new',
+          'https://www.bstn.com/en/sale8/filter/__brand_jordan.nike.nike-sb/page/1/sort/date_new',
       }
 
       const requestId = await recaptcha.initiateCaptchaRequest(

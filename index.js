@@ -14,7 +14,7 @@ var module_jimmyjazz_women = require('./jimmyjazz_women')
 var module_jimmyjazz_grade = require('./jimmyjazz_grade')
 
 var module_kickz = require('./kickz.js')
-var module_shelta = require('./shelta')
+//var module_shelta = require('./shelta')
 var module_sneakerpolitics = require('./sneakerpolitics')
 var module_overkillshop = require('./overkillshop')
 var module_ycmc = require('./ycmc')
@@ -262,7 +262,7 @@ let allWebsites = async () => {
   message += await scrap('footpatrol', module_footpatrol.default)
 
   message += await scrap('shopwss', module_shopwss.default) //complete
-  message += await scrap('solebox', module_solebox.default) //complete
+  //message += await scrap('solebox', module_solebox.default) //complete
   message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
   message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
   message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
