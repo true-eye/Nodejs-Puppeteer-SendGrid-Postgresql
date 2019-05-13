@@ -20,7 +20,7 @@ ubiqlife = async () => {
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
   )
 
-  while (1) {
+  while (page_index <= 20) {
     await page.goto(`https://www.ubiqlife.com/sale/brands/jordan-nike.html`, {
       waitUntil: 'domcontentloaded',
       timeout: 0,

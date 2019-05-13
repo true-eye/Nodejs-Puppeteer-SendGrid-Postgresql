@@ -17,7 +17,7 @@ ycmc_women_jordan = async () => {
 
   let page_index = 1
 
-  while (1) {
+  while (page_index <= 20) {
     await page.goto(
       `https://www.ycmc.com/sale/women/shoes/shopby/brand:Jordan.html?p=${page_index}`,
       { waitUntil: 'domcontentloaded', timeout: 0 },

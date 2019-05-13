@@ -17,7 +17,7 @@ saintalfred = async () => {
 
   let page_index = 1
 
-  while (1) {
+  while (page_index <= 20) {
     await page.goto(
       `https://www.saintalfred.com/collections/sale?page=${page_index}`,
       { waitUntil: 'domcontentloaded', timeout: 0 },

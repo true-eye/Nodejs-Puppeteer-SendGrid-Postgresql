@@ -17,7 +17,7 @@ ycmc_kids_jordan = async () => {
 
   let page_index = 1
 
-  while (1) {
+  while (page_index <= 20) {
     await page.goto(
       `https://www.ycmc.com/sale/kids/shoes/shopby/brand:Jordan.html?esco_kids_age=Big+Kids&p=${page_index}`,
       { waitUntil: 'domcontentloaded', timeout: 0 },

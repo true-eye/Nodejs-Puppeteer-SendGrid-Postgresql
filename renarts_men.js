@@ -16,7 +16,7 @@ renarts_men = async () => {
 
   let page_index = 1
 
-  while (1) {
+  while (page_index <= 20) {
     await page.goto(
       `https://renarts.com/collections/sale-styles/men's+footwear?page=${page_index}&sort_by=created-descending`,
       { waitUntil: 'domcontentloaded', timeout: 0 },
