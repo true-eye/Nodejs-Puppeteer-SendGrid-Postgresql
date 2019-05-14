@@ -237,7 +237,7 @@ let allWebsites = async () => {
   message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
   message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
   message += await scrap('kickz', module_kickz.default)
-  message += await scrap('shelta', module_shelta.default)
+  //message += await scrap('shelta', module_shelta.default)
   message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
   message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
   message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
