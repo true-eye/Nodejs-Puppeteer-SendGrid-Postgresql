@@ -5,7 +5,7 @@ bdgastore_nike = async () => {
 
   const chromeLaunchOptions = {
     // ignoreHTTPSErrors: true,
-    headless: true,
+    headless: false,
     // timeout: 0,
     args: ['--disable-setuid-sandbox', '--no-sandbox'],
   }
@@ -18,9 +18,19 @@ bdgastore_nike = async () => {
   let page_index = 1
 
   while (page_index <= 20) {
-    await page.goto(
-      `https://bdgastore.com/collections/sale#?Collections=Sale&Producttype=Shoes&Vendor=Nike&res_per_page=60&search_return=all&page=${page_index}`,
-    )
+    if (page_index == 1) {
+      await page.goto(
+        `https://bdgastore.com/collections/sale#?Collections=Sale&Producttype=Shoes&Vendor=Nike&search_return=all`,
+        { timeout: 0 },
+      )
+    } else {
+      await page.goto(
+        `https://bdgastore.com/collections/sale#?Collections=Sale&Producttype=Shoes&Vendor=Nike&search_return=all&page=${page_index}`,
+        { timeout: 0 },
+      )
+    }
+
+    await page.waitFor(1000)
 
     const pageInfo = await page.evaluate(() => {
       let products = []
