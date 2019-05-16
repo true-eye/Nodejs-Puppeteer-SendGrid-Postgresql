@@ -55,7 +55,7 @@ var module_renarts_men = require('./renarts_men')
 var module_renarts_women = require('./renarts_women')
 var module_ubiqlife = require('./ubiqlife')
 
-var developer_mode = false
+var developer_mode = require('./manageDBFile/index').developer_mode
 
 app = express()
 
@@ -226,7 +226,7 @@ let allWebsites = async () => {
             <tbody>`
 
   //message += await scrap('finishline_men', module_finishline_men.default)
-  /*
+
   message += await scrap('saintalfred', module_saintalfred.default)
   message += await scrap('kicksusa_men', module_kicksusa_men.default)
   message += await scrap('kicksusa_women', module_kicksusa_women.default)
@@ -270,10 +270,8 @@ let allWebsites = async () => {
   message += await scrap('renarts_men', module_renarts_men.default) //complete
   message += await scrap('renarts_women', module_renarts_women.default) //complete
   message += await scrap('ubiqlife', module_ubiqlife.default) //complete
-*/
-  //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
 
-  message += await scrap('bdgastore_nike', module_bdgastore_nike.default)
+  //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
 
   message += `</tbody></table></body></html>`
 

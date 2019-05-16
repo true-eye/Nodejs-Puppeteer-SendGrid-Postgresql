@@ -1,9 +1,12 @@
 const fs = require('fs')
+export const developer_mode = false
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
-    // resolve([])
-    // return
+    if (developer_mode) {
+      resolve([])
+      return
+    }
     var pg = require('pg')
     const client = pg.connect(process.env.DATABASE_URL, async function(
       err,
