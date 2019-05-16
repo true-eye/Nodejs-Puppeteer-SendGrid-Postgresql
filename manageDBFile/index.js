@@ -1,5 +1,5 @@
 const fs = require('fs')
-export const developer_mode = false
+const developer_mode = false
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
@@ -163,3 +163,4 @@ let save_to_file = (fileName, json) => {
 
 exports.load_from_file = load_from_file
 exports.save_to_file = save_to_file
+exports.developer_mode = developer_mode
