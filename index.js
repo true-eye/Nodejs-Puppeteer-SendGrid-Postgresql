@@ -273,18 +273,7 @@ let allWebsites = async () => {
 
   //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
   message += `</tbody></table></body></html>`
-  /*
-        const sgMail = require('@sendgrid/mail');
-        sgMail.setApiKey("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");
-        const msg = {
-            to: 'joonas.webk@gmail.com',
-            from: 'buyer@arkamix.com',
-            subject: `Website Product Scrap Daily Report`,
-            html: message
-        };
-        sgMail.send(msg).then(res => console.log('Successfully sent to client!')).catch(err => console.log('Failed sent to client!', err));
-    
-    */
+
   if (!developer_mode) {
     const sgMail1 = require('@sendgrid/mail')
     sgMail1.setApiKey(
