@@ -1,5 +1,5 @@
 const fs = require('fs')
-const developer_mode = false
+const developer_mode = true
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
@@ -8,12 +8,12 @@ let load_from_file = fileName => {
       return
     }
     var pg = require('pg')
-    const client = pg.connect(process.env.DATABASE_URL, async function(
+    const client = pg.connect(process.env.DATABASE_URL, async function (
       err,
       client,
       done,
     ) {
-      var handleError = function(err) {
+      var handleError = function (err) {
         if (!err) return false
         done(client)
         return true
@@ -32,7 +32,7 @@ let load_from_file = fileName => {
                 data json,
                 PRIMARY KEY (url)  
             )`,
-        function(err, result) {
+        function (err, result) {
           if (handleError(err, client, done)) {
             console.log('error occured')
             reject(null)
@@ -49,7 +49,7 @@ let load_from_file = fileName => {
       // });
       await client.query(
         `SELECT * FROM product_table_json where url = '${fileName}'`,
-        function(err, result) {
+        function (err, result) {
           if (handleError(err, client, done)) {
             console.log('error occured where select')
             reject(null)
@@ -92,8 +92,8 @@ let save_to_file = (fileName, json) => {
   return new Promise((resolve, reject) => {
     var pg = require('pg')
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      var handleError = function(err) {
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+      var handleError = function (err) {
         if (!err) return false
         done(client)
         return true
@@ -102,7 +102,7 @@ let save_to_file = (fileName, json) => {
 
       client.query(
         `SELECT * FROM product_table_json where url = '${fileName}'`,
-        function(err, result) {
+        function (err, result) {
           if (handleError(err, client, done)) {
             console.log('error occured where select')
             exist = false
@@ -115,7 +115,7 @@ let save_to_file = (fileName, json) => {
           if (result && result.rows.length > 0) {
             client.query(
               `UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`,
-              function(err, update_result) {
+              function (err, update_result) {
                 if (handleError(err, client, done)) {
                   console.log('update error')
                   reject(null)
@@ -131,7 +131,7 @@ let save_to_file = (fileName, json) => {
           } else {
             client.query(
               `INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`,
-              function(err, insert_result) {
+              function (err, insert_result) {
                 if (handleError(err, client, done)) {
                   console.log('insert error')
                   reject(null)

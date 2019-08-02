@@ -116,7 +116,7 @@ scrap = async (sitename, detail_func) => {
                                         <td>New Product Launched</td>
                                         <td><a href="${curItem.ref}">${
                   curItem.ref
-                }</a></td>
+                  }</a></td>
                                         <td>${curItem.title}</td>
                                         <td>${curItem.price}</td>
                                     </tr>`
@@ -138,7 +138,7 @@ scrap = async (sitename, detail_func) => {
                                         <td>Price Changed</td>
                                         <td><a href="${curItem.ref}">${
                     curItem.ref
-                  }</a></td>
+                    }</a></td>
                                         <td>${curItem.title}</td>
                                         <td>${curItem.price}</td>
                                     </tr>`
@@ -229,8 +229,8 @@ let allWebsites = async () => {
 
   message += await scrap('saintalfred', module_saintalfred.default)
   message += await scrap('kicksusa_men', module_kicksusa_men.default)
-  message += await scrap('kicksusa_women', module_kicksusa_women.default)
-  message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
+  // message += await scrap('kicksusa_women', module_kicksusa_women.default)
+  // message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
   message += await scrap('onenessboutique', module_onenessboutique.default)
   message += await scrap('citygear', module_citygear.default)
   message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
