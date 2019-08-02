@@ -1,5 +1,5 @@
 const fs = require('fs')
-const developer_mode = true
+const developer_mode = false
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
