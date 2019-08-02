@@ -242,8 +242,8 @@ let allWebsites = async () => {
   message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
   message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
   message += await scrap('ycmc_women_jordan', module_ycmc_women_jordan.default)
-  message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)
-  message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)
+  // message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)    // deprecated
+  // message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)        // deprecated 
   message += await scrap('asphaltgold', module_asphaltgold.default)
   message += await scrap('notreshop', module_notreshop.default)
   message += await scrap('hanonshop', module_hanonshop.default)
