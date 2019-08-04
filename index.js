@@ -244,56 +244,52 @@ let allWebsites = async () => {
   message += await scrap('theoutnet', module_theoutnet.default)
 
   //message += await scrap('finishline_men', module_finishline_men.default)
-  /*
-    message += await scrap('saintalfred', module_saintalfred.default)
-    message += await scrap('kicksusa_men', module_kicksusa_men.default)
-    // message += await scrap('kicksusa_women', module_kicksusa_women.default)
-    // message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
-    message += await scrap('onenessboutique', module_onenessboutique.default)
-    message += await scrap('citygear', module_citygear.default)
-    message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
-    message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
-    message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
-    message += await scrap('kickz', module_kickz.default)
-    //message += await scrap('shelta', module_shelta.default)
-    message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
-    message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
-    message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
-    message += await scrap('ycmc_women_jordan', module_ycmc_women_jordan.default)
-    // message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)    // deprecated
-    // message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)        // deprecated 
-    message += await scrap('asphaltgold', module_asphaltgold.default)
-    message += await scrap('notreshop', module_notreshop.default)
-    message += await scrap('hanonshop', module_hanonshop.default)
-    message += await scrap('sotostore', module_sotostore.default)
-    message += await scrap('lapstoneandhammer', module_lapstoneandhammer.default)
-    message += await scrap('endclothing', module_endclothing.default)
-    message += await scrap('corporategotem', module_corporategotem.default)
-    message += await scrap('socialstatuspgh', module_socialstatuspgh.default)
-    message += await scrap('bstn', module_bstn.default)
-    message += await scrap('bdgastore_balance', module_bdgastore_balance.default)
-    message += await scrap('bdgastore_jordan', module_bdgastore_jordan.default)
-    message += await scrap('bdgastore_nike', module_bdgastore_nike.default)
-    message += await scrap('centre214', module_centre214.default)
-    message += await scrap('rsvpgallery', module_rsvpgallery.default)
-    message += await scrap('rsvpgallery_nike', module_rsvpgallery_nike.default)
-    message += await scrap('footpatrol', module_footpatrol.default)
-  
-    message += await scrap('shopwss', module_shopwss.default) //complete
-    //message += await scrap('solebox', module_solebox.default) //complete
-    message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
-    message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
-    message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
-  
-    message += await scrap('renarts_men', module_renarts_men.default) //complete
-    message += await scrap('renarts_women', module_renarts_women.default) //complete
-    message += await scrap('ubiqlife', module_ubiqlife.default) //complete
-  
-    //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
-  */
 
+  message += await scrap('saintalfred', module_saintalfred.default)
+  message += await scrap('kicksusa_men', module_kicksusa_men.default)
+  // message += await scrap('kicksusa_women', module_kicksusa_women.default)
+  // message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
+  message += await scrap('onenessboutique', module_onenessboutique.default)
+  message += await scrap('citygear', module_citygear.default)
+  message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
+  message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
+  message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
+  message += await scrap('kickz', module_kickz.default)
+  //message += await scrap('shelta', module_shelta.default)
+  message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
+  message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
+  message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
+  message += await scrap('ycmc_women_jordan', module_ycmc_women_jordan.default)
+  // message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)    // deprecated
+  // message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)        // deprecated 
+  message += await scrap('asphaltgold', module_asphaltgold.default)
+  message += await scrap('notreshop', module_notreshop.default)
+  message += await scrap('hanonshop', module_hanonshop.default)
+  message += await scrap('sotostore', module_sotostore.default)
+  message += await scrap('lapstoneandhammer', module_lapstoneandhammer.default)
+  message += await scrap('endclothing', module_endclothing.default)
+  message += await scrap('corporategotem', module_corporategotem.default)
+  message += await scrap('socialstatuspgh', module_socialstatuspgh.default)
+  message += await scrap('bstn', module_bstn.default)
+  message += await scrap('bdgastore_balance', module_bdgastore_balance.default)
+  message += await scrap('bdgastore_jordan', module_bdgastore_jordan.default)
+  message += await scrap('bdgastore_nike', module_bdgastore_nike.default)
+  message += await scrap('centre214', module_centre214.default)
+  message += await scrap('rsvpgallery', module_rsvpgallery.default)
+  message += await scrap('rsvpgallery_nike', module_rsvpgallery_nike.default)
+  message += await scrap('footpatrol', module_footpatrol.default)
 
+  message += await scrap('shopwss', module_shopwss.default) //complete
+  //message += await scrap('solebox', module_solebox.default) //complete
+  message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
+  message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
+  message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
 
+  message += await scrap('renarts_men', module_renarts_men.default) //complete
+  message += await scrap('renarts_women', module_renarts_women.default) //complete
+  message += await scrap('ubiqlife', module_ubiqlife.default) //complete
+
+  //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
 
   message += `</tbody></table></body></html>`
 

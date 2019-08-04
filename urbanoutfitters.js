@@ -6,7 +6,7 @@ urbanoutfitters = async () => {
 
   const chromeLaunchOptions = {
     // ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
     // timeout: 0,
     args: ['--disable-setuid-sandbox', '--no-sandbox'],
   }
@@ -92,7 +92,7 @@ urbanoutfitters = async () => {
 
     console.log(
       `---------Page ${page_index} ${pageInfo.bLastPage}---------`,
-      pageInfo.products,
+      pageInfo.products.length,
     )
 
     productList = [...productList, ...pageInfo.products]
