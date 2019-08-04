@@ -54,9 +54,17 @@ var module_finishline_men = require('./finishline_men')
 var module_renarts_men = require('./renarts_men')
 var module_renarts_women = require('./renarts_women')
 var module_ubiqlife = require('./ubiqlife')
-var module_nordstromrack = require('./nordstromrack')
+var module_nordstromrack_women = require('./nordstromrack_women')
+var module_nordstromrack_men = require('./nordstromrack_men')
+var module_toddsnyder = require('./toddsnyder');
+var module_deadstock = require('./deadstock');
+var module_urbanoutfitters = require('./urbanoutfitters')
+var module_feature_jordan = require('./feature_jordan')
+var module_feature_nike = require('./feature_nike')
+var module_theoutnet = require('./theoutnet');
 
 var developer_mode = require('./manageDBFile/index').developer_mode
+var test_deploy_mode = require('./manageDBFile/index').test_deploy_mode
 
 app = express()
 
@@ -226,6 +234,15 @@ let allWebsites = async () => {
             </thead>
             <tbody>`
 
+  message += await scrap('nordstromrack_women', module_nordstromrack_women.default);
+  message += await scrap('nordstromrack_men', module_nordstromrack_men.default);
+  message += await scrap('module_toddsnyder', module_toddsnyder.default);
+  message += await scrap('deadstock', module_deadstock.default);
+  message += await scrap('urbanoutfitters', module_urbanoutfitters.default);
+  message += await scrap('feature_jordan', module_feature_jordan.default);
+  message += await scrap('feature_nike', module_feature_nike.default);
+  message += await scrap('theoutnet', module_theoutnet.default)
+
   //message += await scrap('finishline_men', module_finishline_men.default)
   /*
     message += await scrap('saintalfred', module_saintalfred.default)
@@ -276,11 +293,11 @@ let allWebsites = async () => {
   */
 
 
-  message += await scrap('nordstromrack', module_nordstromrack.default);
+
 
   message += `</tbody></table></body></html>`
 
-  if (!developer_mode) {
+  if (!developer_mode && !test_deploy_mode) {
     const sgMail1 = require('@sendgrid/mail')
     sgMail1.setApiKey(
       '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',

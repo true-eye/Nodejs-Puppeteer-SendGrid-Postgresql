@@ -1,5 +1,6 @@
 const fs = require('fs')
-const developer_mode = false
+const developer_mode = true
+const test_deploy_mode = true
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {

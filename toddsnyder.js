@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-nordstromrack = async () => {
+toddsnyder = async () => {
   // Actual Scraping goes Here...
 
   const chromeLaunchOptions = {
@@ -18,34 +18,25 @@ nordstromrack = async () => {
 
   while (page_index <= 20) {
     await page.goto(
-      `https://www.nordstromrack.com/shop/Women/Shoes/Sneakers?brands%5B%5D=Nike&page=${page_index}&sort=featured`,
+      `https://www.toddsnyder.com/collections/sale-shoes`,
       { timeout: 0 },
     )
 
     const pageInfo = await page.evaluate(() => {
       let products = []
-      let btnPage = document.querySelectorAll('.catalog-page__pagination > .pagination > .pagination__item--next')
       let bLast = true
-      if (btnPage) {
-        let btnNext = btnPage[0]
-        if (btnNext != undefined)
-          bLast = false
-      }
-      const productDetails = document.querySelectorAll('.product-grid > .product-grid__row > .product-grid-item');
+      const productDetails = document.querySelectorAll('.lemonade-products > .product > a');
       for (var product of productDetails) {
 
-        let productRef = 'https://www.nordstromrack.com' + product.getAttribute('href')
+        let productRef = 'https://www.toddsnyder.com' + product.getAttribute('href')
 
-        let productTitle = product.querySelector('.product-grid-item__details > .product-grid-item__title').innerHTML
+        let productTitle = product.querySelector('.details > .h3').firstChild.nodeValue
 
         productTitle = productTitle.split('"').join('')
         productTitle = productTitle.replace(/'/g, '')
 
-        let productPrice = product.querySelector('.product-grid-item__details .product-grid-item__sale-price')
-        if (!productPrice)
-          productPrice = product.querySelector('.product-grid-item__details .product-grid-item__pricing--in-cart').innerHTML
-        else
-          productPrice = productPrice.innerHTML
+        let productPrice = product.querySelector('.details > .h3 .money')
+        productPrice = productPrice.innerHTML
 
         products.push({
           ref: productRef,
@@ -64,8 +55,7 @@ nordstromrack = async () => {
 
     productList = [...productList, ...pageInfo.products]
 
-    if (pageInfo.bLastPage == true) break
-    page_index++
+    break;
   }
 
   //console.log(productList.length)
@@ -73,4 +63,4 @@ nordstromrack = async () => {
   browser.close()
   return productList
 }
-exports.default = nordstromrack
+exports.default = toddsnyder
