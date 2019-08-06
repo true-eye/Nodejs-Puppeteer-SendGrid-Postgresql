@@ -62,6 +62,14 @@ var module_urbanoutfitters = require('./urbanoutfitters')
 var module_feature_jordan = require('./feature_jordan')
 var module_feature_nike = require('./feature_nike')
 var module_theoutnet = require('./theoutnet');
+var module_revolve = require('./revolve')
+var module_moda3 = require('./moda3')
+var module_wishatl = require('./wishatl')
+var module_socialstatuspgh_adidas = require('./socialstatuspgh_adidas')
+var module_socialstatuspgh_jordan = require('./socialstatuspgh_jordan')
+var module_packershoes_nike = require('./packershoes_nike')
+var module_packershoes_jordan = require('./packershoes_jordan')
+var module_stylebop = require('./stylebop')
 
 var developer_mode = require('./manageDBFile/index').developer_mode
 var test_deploy_mode = require('./manageDBFile/index').test_deploy_mode
@@ -234,6 +242,8 @@ let allWebsites = async () => {
             </thead>
             <tbody>`
 
+
+
   message += await scrap('nordstromrack_women', module_nordstromrack_women.default);
   message += await scrap('nordstromrack_men', module_nordstromrack_men.default);
   message += await scrap('module_toddsnyder', module_toddsnyder.default);
@@ -241,9 +251,16 @@ let allWebsites = async () => {
   message += await scrap('urbanoutfitters', module_urbanoutfitters.default);
   message += await scrap('feature_jordan', module_feature_jordan.default);
   message += await scrap('feature_nike', module_feature_nike.default);
-  message += await scrap('theoutnet', module_theoutnet.default)
+  message += await scrap('theoutnet', module_theoutnet.default);
+  message += await scrap('revolve', module_revolve.default);
+  message += await scrap('moda3', module_moda3.default);
+  message += await scrap('socialstatuspgh_adidas', module_socialstatuspgh_adidas.default);
+  message += await scrap('socialstatuspgh_jordan', module_socialstatuspgh_jordan.default);
+  // message += await scrap('wishatl', module_wishatl.default);
+  message += await scrap('packershoes_nike', module_packershoes_nike.default);
+  message += await scrap('packershoes_jordan', module_packershoes_jordan.default);
+  // message += await scrap('stylebop', module_stylebop.default);
 
-  //message += await scrap('finishline_men', module_finishline_men.default)
 
   message += await scrap('saintalfred', module_saintalfred.default)
   message += await scrap('kicksusa_men', module_kicksusa_men.default)
