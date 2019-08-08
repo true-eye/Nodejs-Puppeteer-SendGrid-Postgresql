@@ -256,10 +256,10 @@ let allWebsites = async () => {
   message += await scrap('moda3', module_moda3.default);
   message += await scrap('socialstatuspgh_adidas', module_socialstatuspgh_adidas.default);
   message += await scrap('socialstatuspgh_jordan', module_socialstatuspgh_jordan.default);
-  // message += await scrap('wishatl', module_wishatl.default);
+  message += await scrap('wishatl', module_wishatl.default);
   message += await scrap('packershoes_nike', module_packershoes_nike.default);
   message += await scrap('packershoes_jordan', module_packershoes_jordan.default);
-  // message += await scrap('stylebop', module_stylebop.default);
+  message += await scrap('stylebop', module_stylebop.default);
 
 
   message += await scrap('saintalfred', module_saintalfred.default)
