@@ -23,6 +23,7 @@ bstn = async () => {
   )
 
   while (page_index <= 20) {
+
     await page.goto(
       `https://www.bstn.com/en/sale/filter/__brand_jordan.nike.nike-sb/page/${page_index}/sort/date_new`,
       { timeout: 0 },
