@@ -271,6 +271,7 @@ let allWebsites = async () => {
   message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
   message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
   message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
+
   // message += await scrap('kickz', module_kickz.default)    // error on deploy
   //message += await scrap('shelta', module_shelta.default)
   message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
