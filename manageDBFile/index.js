@@ -58,7 +58,7 @@ let load_from_file = fileName => {
           }
 
           done()
-          pg.end()
+          pool.end()
           //console.log(result)
           if (result) {
             if (result.rows.length > 0) {
@@ -128,7 +128,7 @@ let save_to_file = (fileName, json) => {
 
                 console.log('Update successfully')
                 done()
-                pg.end()
+                pool.end()
                 resolve('Success to Save')
               },
             )
@@ -144,7 +144,7 @@ let save_to_file = (fileName, json) => {
 
                 console.log('Insert successfully')
                 done()
-                pg.end()
+                pool.end()
                 resolve('Success to Save')
               },
             )
