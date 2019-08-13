@@ -9,11 +9,11 @@ let load_from_file = fileName => {
       return
     }
     var pg = require('pg')
-    const client = pg.connect(process.env.DATABASE_URL, async function (
-      err,
-      client,
-      done,
-    ) {
+    var pool = new pg.Pool({
+      connectionString: process.env.DATABASE_URL
+    })
+
+    pool.connect(async function (err, client, done) {
       var handleError = function (err) {
         if (!err) return false
         done(client)
@@ -92,8 +92,11 @@ let load_from_file = fileName => {
 let save_to_file = (fileName, json) => {
   return new Promise((resolve, reject) => {
     var pg = require('pg')
+    var pool = new pg.Pool({
+      connectionString: process.env.DATABASE_URL
+    })
 
-    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+    pool.connect(async function (err, client, done) {
       var handleError = function (err) {
         if (!err) return false
         done(client)
