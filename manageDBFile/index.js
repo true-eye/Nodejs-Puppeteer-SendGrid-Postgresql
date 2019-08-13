@@ -1,6 +1,6 @@
 const fs = require('fs')
 const developer_mode = false
-const test_deploy_mode = false
+const test_deploy_mode = true
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
@@ -116,7 +116,7 @@ let save_to_file = (fileName, json) => {
           }
 
           const data = JSON.stringify(json)
-          console.log('get result: ', data)
+          console.log('get result: ', result, result.rows.length)
           if (result && result.rows.length > 0) {
             client.query(
               `UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`,
