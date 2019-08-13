@@ -241,7 +241,7 @@ let allWebsites = async () => {
                 </tr>
             </thead>
             <tbody>`
-  message += await scrap('socialstatuspgh_adidas', module_socialstatuspgh_adidas.default);
+  message += await scrap('social_adidas', module_socialstatuspgh_adidas.default);
   /*
     message += await scrap('nordstromrack_women', module_nordstromrack_women.default);
     message += await scrap('nordstromrack_men', module_nordstromrack_men.default);
