@@ -48,8 +48,13 @@ saintalfred = async () => {
             let productTitle = productVendor + ' ' + div_item_title.innerText
             productTitle = productTitle.split('"').join('')
             productTitle = productTitle.replace(/'/g, '')
-            const productPrice =
-              div_item_price.firstElementChild.firstElementChild.innerText
+            let productPrice = 'SOLD OUT'
+            if (div_item_price.firstElementChild) {
+              if (div_item_price.firstElementChild.firstElementChild)
+                productPrice = div_item_price.firstElementChild.firstElementChild.innerText
+              else
+                productPrice = div_item_price.firstElementChild.innerText
+            }
             products.push({
               ref: productRef,
               title: productTitle,
@@ -62,7 +67,7 @@ saintalfred = async () => {
       return { products, bLastPage: btnNextPage[0] == undefined }
     })
 
-    console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`)
+    console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products)
 
     productList = [...productList, ...pageInfo.products]
 

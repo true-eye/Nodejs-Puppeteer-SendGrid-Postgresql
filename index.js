@@ -241,9 +241,6 @@ let allWebsites = async () => {
                 </tr>
             </thead>
             <tbody>`
-
-
-
   message += await scrap('nordstromrack_women', module_nordstromrack_women.default);
   message += await scrap('nordstromrack_men', module_nordstromrack_men.default);
   message += await scrap('module_toddsnyder', module_toddsnyder.default);

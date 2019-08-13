@@ -32,9 +32,9 @@ endclothing = async () => {
     )
 
     const isCaptcha = await page.evaluate(() => {
-      //let gCaptcha = document.getElementById("g-recaptcha-response");
-      let gCaptcha = document.querySelectorAll('.product-items')
-      return gCaptcha.length == 0
+      let gCaptcha = document.getElementById("g-recaptcha-response");
+      // let gCaptcha = document.querySelectorAll('.product-items')
+      return gCaptcha != null
     })
 
     console.log(isCaptcha)
@@ -142,8 +142,8 @@ async function pollForRequestResults(
 
 function requestCaptchaResults(apiKey, requestId) {
   const url = `http://2captcha.com/res.php?key=${apiKey}&action=get&id=${requestId}&json=1`
-  return async function() {
-    return new Promise(async function(resolve, reject) {
+  return async function () {
+    return new Promise(async function (resolve, reject) {
       const rawResponse = await request.get(url)
       const resp = JSON.parse(rawResponse)
       if (resp.status === 0) return reject(resp.request)
