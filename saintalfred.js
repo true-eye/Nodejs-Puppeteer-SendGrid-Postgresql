@@ -67,7 +67,7 @@ saintalfred = async () => {
       return { products, bLastPage: btnNextPage[0] == undefined }
     })
 
-    console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products)
+    console.log(`---------Page ${page_index} ${pageInfo.bLastPage}---------`, pageInfo.products.length)
 
     productList = [...productList, ...pageInfo.products]
 
