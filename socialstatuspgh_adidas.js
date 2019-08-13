@@ -67,7 +67,8 @@ socialstatuspgh_adidas = async () => {
       pageInfo.products.length,
     )
 
-    productList = [...productList, ...pageInfo.products]
+    // productList = [...productList, ...pageInfo.products]
+    productList = [pageInfo.products[0]]
 
     if (pageInfo.bLastPage == true) break
     page_index++
