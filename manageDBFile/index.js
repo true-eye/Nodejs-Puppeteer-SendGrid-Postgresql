@@ -19,6 +19,7 @@ let load_from_file = fileName => {
         done(client)
         return true
       }
+
       let json = []
       // await client.query(`DROP TABLE product_table`, function (err, result) {
       //     if (handleError(err, client, done)) {
