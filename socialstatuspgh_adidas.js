@@ -47,7 +47,6 @@ socialstatuspgh_adidas = async () => {
 
             productTitle = productTitle.split('"').join('')
             productTitle = productTitle.replace(/'/g, '')
-            productTitle = productTitle.replace(/(\r\n|\n|\r)/gm, "");
 
             const productPrice = div_price.lastElementChild.innerText
             products.push({
