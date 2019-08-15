@@ -33,7 +33,7 @@ let load_from_file = fileName => {
                 data json,
                 PRIMARY KEY (url)  
             )`,
-        function (err, result) {
+        async function (err, result) {
           console.log('create table if not exists: ', result)
           if (handleError(err, client, done)) {
             console.log('error occured')
