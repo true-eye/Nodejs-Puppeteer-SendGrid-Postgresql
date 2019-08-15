@@ -48,6 +48,7 @@ bstn = async () => {
           'https://www.bstn.com/en/sale8/filter/__brand_jordan.nike.nike-sb/page/1/sort/date_new',
       }
 
+
       const requestId = await recaptcha.initiateCaptchaRequest(
         apiKey,
         siteDetails,
