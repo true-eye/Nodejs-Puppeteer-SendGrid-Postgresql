@@ -56,9 +56,11 @@ let load_from_file = fileName => {
                 if (result.rows.length > 0) {
                   if (result.rows.length != 1) {
                     console.log('error length is not 1')
-                    return false
+                    reject(null)
+                    return;
                   } else {
                     json = result.rows[0].data
+                    resolve(json)
                     return true
                   }
                 }
