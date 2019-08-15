@@ -1,6 +1,6 @@
 const fs = require('fs')
 const developer_mode = false
-const test_deploy_mode = false
+const test_deploy_mode = true
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
@@ -35,6 +35,7 @@ let load_from_file = fileName => {
                 PRIMARY KEY (url)  
             )`,
         function (err, result) {
+          console.log('create table if not exists: ', result)
           if (handleError(err, client, done)) {
             console.log('error occured')
             reject(null)
@@ -52,6 +53,7 @@ let load_from_file = fileName => {
       await client.query(
         `SELECT * FROM product_table_json where url = '${fileName}'`,
         function (err, result) {
+          console.log('select from product_table_json: ', result)
           if (handleError(err, client, done)) {
             console.log('error occured where select')
             reject(null)
@@ -60,7 +62,7 @@ let load_from_file = fileName => {
 
           done()
           pool.end()
-          //console.log(result)
+          // console.log(result)
           if (result) {
             if (result.rows.length > 0) {
               if (result.rows.length != 1) {
@@ -118,9 +120,11 @@ let save_to_file = (fileName, json) => {
           const data = JSON.stringify(json)
           // console.log('get result: ', data)
           if (result && result.rows.length > 0) {
+            console.log('start updating table');
             client.query(
               `UPDATE product_table_json SET url = '${fileName}', data = '${data}' where url = '${fileName}'`,
               function (err, update_result) {
+                console.log('update result: ', update_result)
                 if (handleError(err, client, done)) {
                   console.log('update error')
                   reject(null)
@@ -134,9 +138,11 @@ let save_to_file = (fileName, json) => {
               },
             )
           } else {
+            console.log('start inserting table');
             client.query(
               `INSERT into product_table_json (url, data) Values('${fileName}', '${data}')`,
               function (err, insert_result) {
+                console.log('insert result: ', insert_result)
                 if (handleError(err, client, done)) {
                   console.log('insert error')
                   reject(null)
@@ -153,8 +159,6 @@ let save_to_file = (fileName, json) => {
         },
       )
     })
-
-    console.log('hello')
 
     // fs.writeFile("./" + fileName, JSON.stringify(json), function (err) {
     //     if (!err) {
