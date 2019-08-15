@@ -1,6 +1,5 @@
 const fs = require('fs')
 const developer_mode = false
-const test_deploy_mode = true
 
 let load_from_file = fileName => {
   return new Promise((resolve, reject) => {
@@ -40,6 +39,34 @@ let load_from_file = fileName => {
             console.log('error occured')
             reject(null)
           }
+          await client.query(
+            `SELECT * FROM product_table_json where url = '${fileName}'`,
+            function (err, result) {
+              console.log('select from product_table_json: ', result)
+              if (handleError(err, client, done)) {
+                console.log('error occured where select')
+                reject(null)
+                return
+              }
+
+              done()
+              pool.end()
+              // console.log(result)
+              if (result) {
+                if (result.rows.length > 0) {
+                  if (result.rows.length != 1) {
+                    console.log('error length is not 1')
+                    return false
+                  } else {
+                    json = result.rows[0].data
+                    return true
+                  }
+                }
+              }
+              console.log('original product count: ', json.length)
+              resolve(json)
+            },
+          )
         },
       )
 
@@ -50,35 +77,6 @@ let load_from_file = fileName => {
       //     done();
       //     result = true;
       // });
-      await client.query(
-        `SELECT * FROM product_table_json where url = '${fileName}'`,
-        function (err, result) {
-          console.log('select from product_table_json: ', result)
-          if (handleError(err, client, done)) {
-            console.log('error occured where select')
-            reject(null)
-            return
-          }
-
-          done()
-          pool.end()
-          // console.log(result)
-          if (result) {
-            if (result.rows.length > 0) {
-              if (result.rows.length != 1) {
-                console.log('error length is not 1')
-                return false
-              } else {
-                json = result.rows[0].data
-                return true
-              }
-            }
-          }
-        },
-      )
-
-      console.log('original product count: ', json.length)
-      resolve(json)
     })
 
     // fs.readFile("./" + fileName, function (err, text) {

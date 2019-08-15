@@ -72,7 +72,7 @@ var module_packershoes_jordan = require('./packershoes_jordan')
 var module_stylebop = require('./stylebop')
 
 var developer_mode = require('./manageDBFile/index').developer_mode
-var test_deploy_mode = require('./manageDBFile/index').test_deploy_mode
+var test_deploy_mode = true
 
 app = express()
 
