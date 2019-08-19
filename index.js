@@ -314,7 +314,8 @@ let allWebsites = async () => {
       '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',
     )
     const msg1 = {
-      to: 'buyer@arkamix.com',
+      // to: 'buyer@arkamix.com',
+      to: 'hamesmodric@gmail.com',
       from: 'buyer@arkamix.com',
       subject: `Website Product Scrap Daily Report`,
       html: message,
