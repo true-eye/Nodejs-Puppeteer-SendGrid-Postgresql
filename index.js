@@ -226,6 +226,11 @@ let allWebsites = async () => {
                 background-color: #FCAF50;
                 color: #000;
             }
+
+
+            tr td:nth-child(3) {
+              width: 50%;
+            }
         </style>
     </head>
     
