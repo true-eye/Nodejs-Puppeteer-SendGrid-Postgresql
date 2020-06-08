@@ -56,12 +56,12 @@ var module_renarts_women = require('./renarts_women')
 var module_ubiqlife = require('./ubiqlife')
 var module_nordstromrack_women = require('./nordstromrack_women')
 var module_nordstromrack_men = require('./nordstromrack_men')
-var module_toddsnyder = require('./toddsnyder');
-var module_deadstock = require('./deadstock');
+var module_toddsnyder = require('./toddsnyder')
+var module_deadstock = require('./deadstock')
 var module_urbanoutfitters = require('./urbanoutfitters')
 var module_feature_jordan = require('./feature_jordan')
 var module_feature_nike = require('./feature_nike')
-var module_theoutnet = require('./theoutnet');
+var module_theoutnet = require('./theoutnet')
 var module_revolve = require('./revolve')
 var module_moda3 = require('./moda3')
 var module_wishatl = require('./wishatl')
@@ -97,109 +97,91 @@ var transporter2 = nodemailer.createTransport(smtpTransport({
 }));*/
 
 scrap = async (sitename, detail_func) => {
-  let func_name = 'scrap_' + sitename
-  console.log(func_name, '   Start   ')
-  let message = `<tr><td colspan="5" class="sitename">${sitename}</td></tr>`
-  let ret = await manageDBFile
-    .load_from_file(`${sitename}.json`)
-    .then(prevList => {
-      return detail_func()
-        .then(currentList => {
-          console.log(
-            func_name,
-            ' getCurrentProductList success : ',
-            currentList.length,
-          )
+	let func_name = 'scrap_' + sitename
+	console.log(func_name, '   Start   ')
+	let message = `<tr><td colspan="5" class="sitename">${sitename}</td></tr>`
+	let ret = await manageDBFile
+		.load_from_file(`${sitename}.json`)
+		.then(prevList => {
+			return detail_func()
+				.then(currentList => {
+					console.log(func_name, ' getCurrentProductList success : ', currentList.length)
 
-          var changedFlag = false
+					var changedFlag = false
 
-          if (prevList.length > 0) {
-            let count = 1
-            for (let i in currentList) {
-              const curItem = currentList[i]
-              const productsWithSameTitle = prevList.filter(
-                item => item.title == curItem.title && item.ref == curItem.ref,
-              )
+					if (prevList.length > 0) {
+						let count = 1
+						for (let i in currentList) {
+							const curItem = currentList[i]
+							const productsWithSameTitle = prevList.filter(item => item.title == curItem.title && item.ref == curItem.ref)
 
-              if (productsWithSameTitle.length == 0) {
-                // curItem is a new item
-                console.log(
-                  `******* ${func_name} new item launched ******`,
-                  curItem,
-                )
+							if (productsWithSameTitle.length == 0) {
+								// curItem is a new item
+								console.log(`******* ${func_name} new item launched ******`, curItem)
 
-                message += `<tr>
+								message += `<tr>
                                         <td>${count}</td>
                                         <td>New Product Launched</td>
-                                        <td><a href="${curItem.ref}">${
-                  curItem.ref
-                  }</a></td>
+                                        <td><a href="${curItem.ref}">${curItem.ref}</a></td>
                                         <td>${curItem.title}</td>
                                         <td>${curItem.price}</td>
                                     </tr>`
 
-                changedFlag = true
-                count++
-              } else {
-                const prevProduct = productsWithSameTitle[0]
-                if (curItem.price != prevProduct.price) {
-                  console.log(
-                    `------ ${func_name} product price changed ------`,
-                    curItem,
-                    '::: prev price ::: ',
-                    prevProduct.price,
-                  )
+								changedFlag = true
+								count++
+							} else {
+								const prevProduct = productsWithSameTitle[0]
+								if (curItem.price != prevProduct.price) {
+									console.log(`------ ${func_name} product price changed ------`, curItem, '::: prev price ::: ', prevProduct.price)
 
-                  message += `<tr>
+									message += `<tr>
                                         <td>${count}</td>
                                         <td>Price Changed</td>
-                                        <td><a href="${curItem.ref}">${
-                    curItem.ref
-                    }</a></td>
+                                        <td><a href="${curItem.ref}">${curItem.ref}</a></td>
                                         <td>${curItem.title}</td>
                                         <td>${curItem.price}</td>
                                     </tr>`
 
-                  changedFlag = true
-                  count++
-                }
-              }
-            }
-          }
+									changedFlag = true
+									count++
+								}
+							}
+						}
+					}
 
-          if (changedFlag == false) {
-            console.log(func_name, ' no changes')
-            message += `<tr><td colspan="5">No Changes</td>`
-          }
+					if (changedFlag == false) {
+						console.log(func_name, ' no changes')
+						message += `<tr><td colspan="5">No Changes</td>`
+					}
 
-          // save changed product list
-          //if (prevList.length == 0 || changedFlag == true)
-          if (!developer_mode) {
-            manageDBFile
-              .save_to_file(`${sitename}.json`, currentList)
-              .then(res => {
-                console.log(res)
-              })
-              .catch(err => {
-                console.log(func_name, ' saveToFile return error : ', err)
-              })
-          }
-          return message
-        })
-        .catch(err => {
-          console.log(func_name, ` ${sitename} return error : `, err)
-          return null
-        })
-    })
-    .catch(err => {
-      console.log(func_name, ' loadFromFile return error : ', err)
-      return null
-    })
-  return ret
+					// save changed product list
+					//if (prevList.length == 0 || changedFlag == true)
+					if (!developer_mode) {
+						manageDBFile
+							.save_to_file(`${sitename}.json`, currentList)
+							.then(res => {
+								console.log(res)
+							})
+							.catch(err => {
+								console.log(func_name, ' saveToFile return error : ', err)
+							})
+					}
+					return message
+				})
+				.catch(err => {
+					console.log(func_name, ` ${sitename} return error : `, err)
+					return null
+				})
+		})
+		.catch(err => {
+			console.log(func_name, ' loadFromFile return error : ', err)
+			return null
+		})
+	return ret
 }
 
 let allWebsites = async () => {
-  let message = `<html>
+	let message = `<html>
 
     <head>
         <style>
@@ -247,104 +229,99 @@ let allWebsites = async () => {
             </thead>
             <tbody>`
 
-  message += await scrap('nordstromrack_women', module_nordstromrack_women.default);
-  message += await scrap('nordstromrack_men', module_nordstromrack_men.default);
-  message += await scrap('module_toddsnyder', module_toddsnyder.default);
-  message += await scrap('deadstock', module_deadstock.default);
-  message += await scrap('urbanoutfitters', module_urbanoutfitters.default);
-  message += await scrap('feature_jordan', module_feature_jordan.default);
-  message += await scrap('feature_nike', module_feature_nike.default);
-  message += await scrap('theoutnet', module_theoutnet.default);
-  message += await scrap('revolve', module_revolve.default);
-  message += await scrap('moda3', module_moda3.default);
-  message += await scrap('social_adidas', module_socialstatuspgh_adidas.default);
-  message += await scrap('social_jordan', module_socialstatuspgh_jordan.default);
-  message += await scrap('wishatl', module_wishatl.default);
-  message += await scrap('packershoes_nike', module_packershoes_nike.default);
-  message += await scrap('packershoes_jordan', module_packershoes_jordan.default);
-  message += await scrap('stylebop', module_stylebop.default);
+	message += await scrap('nordstromrack_women', module_nordstromrack_women.default)
+	message += await scrap('nordstromrack_men', module_nordstromrack_men.default)
+	message += await scrap('module_toddsnyder', module_toddsnyder.default)
+	message += await scrap('deadstock', module_deadstock.default)
+	message += await scrap('urbanoutfitters', module_urbanoutfitters.default)
+	message += await scrap('feature_jordan', module_feature_jordan.default)
+	message += await scrap('feature_nike', module_feature_nike.default)
+	message += await scrap('theoutnet', module_theoutnet.default)
+	message += await scrap('revolve', module_revolve.default)
+	message += await scrap('moda3', module_moda3.default)
+	message += await scrap('social_adidas', module_socialstatuspgh_adidas.default)
+	message += await scrap('social_jordan', module_socialstatuspgh_jordan.default)
+	message += await scrap('wishatl', module_wishatl.default)
+	message += await scrap('packershoes_nike', module_packershoes_nike.default)
+	message += await scrap('packershoes_jordan', module_packershoes_jordan.default)
+	message += await scrap('stylebop', module_stylebop.default)
 
+	message += await scrap('saintalfred', module_saintalfred.default)
+	message += await scrap('kicksusa_men', module_kicksusa_men.default)
+	// message += await scrap('kicksusa_women', module_kicksusa_women.default)
+	// message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
+	message += await scrap('onenessboutique', module_onenessboutique.default)
+	message += await scrap('citygear', module_citygear.default)
+	message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
+	message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
+	message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
 
-  message += await scrap('saintalfred', module_saintalfred.default)
-  message += await scrap('kicksusa_men', module_kicksusa_men.default)
-  // message += await scrap('kicksusa_women', module_kicksusa_women.default)
-  // message += await scrap('kicksusa_kids', module_kicksusa_kids.default)
-  message += await scrap('onenessboutique', module_onenessboutique.default)
-  message += await scrap('citygear', module_citygear.default)
-  message += await scrap('jimmyjazz_men', module_jimmyjazz_men.default)
-  message += await scrap('jimmyjazz_women', module_jimmyjazz_women.default)
-  message += await scrap('jimmyjazz_grade', module_jimmyjazz_grade.default)
+	// message += await scrap('kickz', module_kickz.default)    // error on deploy
+	//message += await scrap('shelta', module_shelta.default)
+	message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
+	message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
+	message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
+	message += await scrap('ycmc_women_jordan', module_ycmc_women_jordan.default)
+	// message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)    // deprecated
+	// message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)        // deprecated
+	message += await scrap('asphaltgold', module_asphaltgold.default)
+	message += await scrap('notreshop', module_notreshop.default)
+	message += await scrap('hanonshop', module_hanonshop.default)
+	message += await scrap('sotostore', module_sotostore.default)
+	message += await scrap('lapstoneandhammer', module_lapstoneandhammer.default)
+	message += await scrap('endclothing', module_endclothing.default)
+	message += await scrap('corporategotem', module_corporategotem.default)
+	message += await scrap('socialstatuspgh', module_socialstatuspgh.default)
+	message += await scrap('bstn', module_bstn.default)
+	message += await scrap('bdgastore_balance', module_bdgastore_balance.default)
+	message += await scrap('bdgastore_jordan', module_bdgastore_jordan.default)
+	message += await scrap('bdgastore_nike', module_bdgastore_nike.default)
+	message += await scrap('centre214', module_centre214.default)
+	message += await scrap('rsvpgallery', module_rsvpgallery.default)
+	message += await scrap('rsvpgallery_nike', module_rsvpgallery_nike.default)
+	message += await scrap('footpatrol', module_footpatrol.default)
 
-  // message += await scrap('kickz', module_kickz.default)    // error on deploy
-  //message += await scrap('shelta', module_shelta.default)
-  message += await scrap('sneakerpolitics', module_sneakerpolitics.default)
-  message += await scrap('ycmc_men_jordan', module_ycmc_men_jordan.default)
-  message += await scrap('ycmc_men_nike', module_ycmc_men_nike.default)
-  message += await scrap('ycmc_women_jordan', module_ycmc_women_jordan.default)
-  // message += await scrap('ycmc_kids_jordan', module_ycmc_kids_jordan.default)    // deprecated
-  // message += await scrap('ycmc_kids_nike', module_ycmc_kids_nike.default)        // deprecated 
-  message += await scrap('asphaltgold', module_asphaltgold.default)
-  message += await scrap('notreshop', module_notreshop.default)
-  message += await scrap('hanonshop', module_hanonshop.default)
-  message += await scrap('sotostore', module_sotostore.default)
-  message += await scrap('lapstoneandhammer', module_lapstoneandhammer.default)
-  message += await scrap('endclothing', module_endclothing.default)
-  message += await scrap('corporategotem', module_corporategotem.default)
-  message += await scrap('socialstatuspgh', module_socialstatuspgh.default)
-  message += await scrap('bstn', module_bstn.default)
-  message += await scrap('bdgastore_balance', module_bdgastore_balance.default)
-  message += await scrap('bdgastore_jordan', module_bdgastore_jordan.default)
-  message += await scrap('bdgastore_nike', module_bdgastore_nike.default)
-  message += await scrap('centre214', module_centre214.default)
-  message += await scrap('rsvpgallery', module_rsvpgallery.default)
-  message += await scrap('rsvpgallery_nike', module_rsvpgallery_nike.default)
-  message += await scrap('footpatrol', module_footpatrol.default)
+	message += await scrap('shopwss', module_shopwss.default) //complete
+	//message += await scrap('solebox', module_solebox.default) //complete
+	message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
+	message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
+	message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
 
-  message += await scrap('shopwss', module_shopwss.default) //complete
-  //message += await scrap('solebox', module_solebox.default) //complete
-  message += await scrap('undefeat_nike', module_undefeat_nike.default) //complete
-  message += await scrap('undefeat_jordan', module_undefeat_jordan.default) //complete
-  message += await scrap('sneakersnstuff', module_sneakersnstuff.default) //complete
+	message += await scrap('renarts_men', module_renarts_men.default) //complete
+	message += await scrap('renarts_women', module_renarts_women.default) //complete
+	message += await scrap('ubiqlife', module_ubiqlife.default) //complete
+	//message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
 
-  message += await scrap('renarts_men', module_renarts_men.default) //complete
-  message += await scrap('renarts_women', module_renarts_women.default) //complete
-  message += await scrap('ubiqlife', module_ubiqlife.default) //complete
-  //message += await module_overkillshop.scrap_overkillshop("scrap_overkillshop");
+	message += `</tbody></table></body></html>`
 
-  message += `</tbody></table></body></html>`
+	if (!test_deploy_mode) {
+		const sgMail1 = require('@sendgrid/mail')
+		sgMail1.setApiKey(process.env.SENDGRID_API_KEY)
+		const msg1 = {
+			to: 'buyer@arkamix.com',
+			from: 'buyer@arkamix.com',
+			subject: `Website Product Scrap Daily Report`,
+			html: message,
+		}
+		sgMail1
+			.send(msg1)
+			.then(res => console.log('Successfully sent to client!'))
+			.catch(err => console.log('Failed sent to client!'))
 
-  if (!test_deploy_mode) {
-    const sgMail1 = require('@sendgrid/mail')
-    sgMail1.setApiKey(
-      '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',
-    )
-    const msg1 = {
-      to: 'buyer@arkamix.com',
-      from: 'buyer@arkamix.com',
-      subject: `Website Product Scrap Daily Report`,
-      html: message,
-    }
-    sgMail1
-      .send(msg1)
-      .then(res => console.log('Successfully sent to client!'))
-      .catch(err => console.log('Failed sent to client!'))
-
-    const sgMail2 = require('@sendgrid/mail')
-    sgMail2.setApiKey(
-      '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',
-    )
-    const msg2 = {
-      // to: 'buyer@arkamix.com',
-      to: 'hamesmodric@gmail.com',
-      from: 'buyer@arkamix.com',
-      subject: `Website Product Scrap Daily Report`,
-      html: message,
-    }
-    sgMail2
-      .send(msg2)
-      .then(res => console.log('Successfully sent to me!'))
-      .catch(err => console.log('Failed sent to me!'))
-  }
+		const sgMail2 = require('@sendgrid/mail')
+		sgMail2.setApiKey(process.env.SENDGRID_API_KEY)
+		const msg2 = {
+			// to: 'buyer@arkamix.com',
+			to: 'hamesmodric@gmail.com',
+			from: 'buyer@arkamix.com',
+			subject: `Website Product Scrap Daily Report`,
+			html: message,
+		}
+		sgMail2
+			.send(msg2)
+			.then(res => console.log('Successfully sent to me!'))
+			.catch(err => console.log('Failed sent to me!'))
+	}
 }
 
 //cron.schedule("* * 12 * *", function () {
